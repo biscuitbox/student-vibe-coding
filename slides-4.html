@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d9488">
+<title>4차시 · 사용자 중심 학습 도구 개발하기</title>
+<style>
+:root{--accent:#0d9488;--accent-dark:#0f766e;--accent-soft:#ccfbf1;
+      --ink:#0e1a19;--muted:#5c6b6a;--line:#d7e2e0;--bg:#f6faf9;--paper:#fff}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);overflow:hidden;
+  font-family:-apple-system,"Malgun Gothic","Apple SD Gothic Neo",sans-serif}
+.deck{height:100vh;display:flex;flex-direction:column}
+.stage{flex:1;position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;
+  padding:4.5vh 4vw;overflow:auto}
+.slide.on{display:flex}
+.eyebrow{color:var(--accent-dark);font-size:clamp(17px,2.1vw,25px);margin:0 0 14px;
+  display:flex;align-items:center;gap:10px}
+.eyebrow::after{content:"";flex:1;height:2px;background:var(--line)}
+h2{font-size:clamp(30px,4.6vw,74px);line-height:1.22;margin:0 0 20px;letter-spacing:-.025em}
+.sub{font-size:clamp(18px,2.3vw,38px);line-height:1.6;color:var(--muted);margin:0;max-width:42em}
+.sub b{color:var(--ink)}
+ul.pts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:clamp(8px,1.3vh,18px)}
+ul.pts li{background:var(--paper);border:1px solid var(--line);border-left:7px solid var(--accent);
+  border-radius:12px;padding:clamp(14px,2.2vh,30px) clamp(20px,2.4vw,40px);
+  font-size:clamp(17px,2.2vw,40px);line-height:1.4}
+ul.pts li:nth-child(5)~li,ul.pts li:nth-last-child(n+5),ul.pts li:nth-last-child(n+5)~li{
+  padding:clamp(12px,1.7vh,22px) clamp(18px,2.2vw,34px);font-size:clamp(16px,2vw,34px)}
+.note{margin:24px 0 0;font-size:clamp(15px,1.8vw,30px);color:var(--muted);line-height:1.55}
+.note b{color:var(--accent-dark)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:clamp(12px,1.4vw,22px)}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:14px;
+  padding:clamp(16px,1.9vw,28px)}
+.step .ic{font-size:clamp(26px,3vw,48px);line-height:1.15;color:var(--accent-dark);font-weight:700}
+.step b{display:block;font-size:clamp(17px,2vw,34px);margin:10px 0 5px}
+.step span{color:var(--muted);font-size:clamp(14px,1.6vw,27px);line-height:1.5}
+.shotbox{margin-top:8px;border:3px dashed #9fb8b4;border-radius:14px;background:#eef6f4;
+  color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:22px;min-height:44vh;font-size:clamp(14px,1.6vw,24px)}
+.shotbox img{max-width:100%;max-height:54vh;border-radius:8px;display:block}
+figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%}
+figure svg{width:100%;height:auto;max-height:62vh}
+figcaption{color:var(--muted);font-size:clamp(14px,1.6vw,26px);text-align:center;max-width:48em;line-height:1.45}
+.cover{background:linear-gradient(140deg,var(--accent-dark),var(--accent));color:#fff;
+  justify-content:center;align-items:flex-start}
+.cover .ses{font-size:clamp(16px,2vw,24px);opacity:.85;margin:0 0 10px}
+.cover h1{font-size:clamp(32px,5.6vw,92px);line-height:1.2;margin:0 0 18px;letter-spacing:-.03em}
+.cover p{font-size:clamp(18px,2.4vw,40px);opacity:.92;margin:0;max-width:32em;line-height:1.45}
+.cover .course{position:absolute;left:6vw;bottom:5vh;font-size:clamp(14px,1.5vw,19px);opacity:.75}
+.tl{display:flex;flex-direction:column;gap:clamp(10px,1.4vh,18px)}
+.tlrow{display:flex;align-items:center;gap:18px;background:var(--paper);border:1px solid var(--line);
+  border-radius:12px;padding:clamp(14px,1.8vh,24px) clamp(20px,2.2vw,34px)}
+.tlrow .t{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent-dark);
+  font-size:clamp(17px,2vw,34px);white-space:nowrap}
+.tlrow .d{font-size:clamp(16px,2.1vw,38px)}
+.lead{font-size:clamp(18px,2.4vw,38px);font-weight:700;color:var(--accent-dark);
+  margin:0 0 16px;line-height:1.3}
+.endslide .lead{color:var(--accent-soft)}
+.big{font-size:clamp(34px,6.4vw,104px);font-weight:700;line-height:1.12;margin:0 0 22px;
+  letter-spacing:-.03em}
+.endslide{background:var(--ink);color:#fff}
+.endslide .eyebrow{color:var(--accent-soft)}
+.endslide .eyebrow::after{background:#39514e}
+.endslide .sub{color:#b9ccc9}
+.endslide .sub b{color:#fff}
+.bar{display:flex;align-items:center;gap:14px;padding:10px 16px;background:var(--paper);
+  border-top:1px solid var(--line)}
+.bar button{background:var(--accent);color:#fff;border:0;border-radius:9px;padding:9px 16px;
+  font-size:15px;cursor:pointer;font-family:inherit}
+.bar button:disabled{background:#9db8b5;cursor:default}
+.bar .count{font-variant-numeric:tabular-nums;color:var(--muted);font-size:15px}
+.bar .prog{flex:1;height:6px;background:#e3ecea;border-radius:3px;overflow:hidden}
+.bar .prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .2s}
+.bar a{color:var(--muted);text-decoration:none;font-size:14px;padding:6px 10px;border-radius:8px}
+.bar a:hover{background:var(--accent-soft);color:var(--accent-dark)}
+@media (max-width:600px){
+  .slide{padding:4vh 6vw}
+  .bar a{display:none}
+}
+@media print{
+  body{overflow:visible} .deck{height:auto} .stage{height:auto}
+  .slide{display:flex!important;position:static;page-break-after:always;min-height:95vh;border-bottom:1px solid #ccc}
+  .bar{display:none}
+}
+</style>
+</head>
+<body>
+<div class="deck">
+  <div class="stage">
+<section class="slide cover"><p class="ses">4차시</p><h1>사용자 중심 학습 도구 개발하기</h1><p>오늘부터 내가 진짜로 쓸 도구</p><div class="course">바이브코딩으로 만드는 나만의 게임과 학습 도구</div></section>
+<section class="slide"><p class="eyebrow">4차시 · 사용자 중심 학습 도구 개발하기</p><h2>오늘의 흐름 · 45분</h2><div class="tl"><div class="tlrow"><span class="t">00~05분</span><span class="d">게임에서 도구로</span></div><div class="tlrow"><span class="t">05~12분</span><span class="d">무엇을 만들까</span></div><div class="tlrow"><span class="t">12~36분</span><span class="d">내 도구 만들기</span></div><div class="tlrow"><span class="t">36~45분</span><span class="d">파일 제출하기</span></div></div><p class="note">시간은 안내일 뿐입니다. 막히는 사람이 많으면 실습 시간을 늘립니다.</p></section>
+<section class="slide"><p class="eyebrow">4차시 · 사용자 중심 학습 도구 개발하기</p><p class="lead">게임에서 도구로</p><p class="big">이번엔 내가 쓸 것</p><p class="sub">만들고 끝나는 게 아니라, 오늘부터 실제로 씁니다.</p></section>
+<section class="slide"><p class="eyebrow">4차시 · 사용자 중심 학습 도구 개발하기</p><h2>무엇을 만들까</h2><div class="steps"><div class="step"><div class="ic">📋</div><b>오늘 할 일</b><span>적고, 끝내면 체크하고, 치우기</span></div><div class="step"><div class="ic">🗓️</div><b>나만의 시간표</b><span>칸을 눌러 과목 고치기</span></div><div class="step"><div class="ic">⏱️</div><b>공부 타이머</b><span>25분 공부 5분 휴식, 횟수 세기</span></div><div class="step"><div class="ic">📅</div><b>디데이</b><span>시험까지 며칠 남았나</span></div></div><p class="note">직접 정해도 됩니다. 내가 진짜 쓸 것이면 뭐든 좋습니다.</p></section>
+<section class="slide"><p class="eyebrow">4차시 · 사용자 중심 학습 도구 개발하기</p><h2>도구에 꼭 들어갈 것</h2><ul class="pts"><li>입력하고 추가하는 자리</li><li>목록으로 쌓이는 화면</li><li>끝낸 것을 표시하거나 지우는 기능</li><li>비어 있을 때 보여 줄 안내 문구</li><li><b>localStorage 저장</b> — 3차시에 배운 그것</li></ul></section>
+<section class="slide"><p class="eyebrow">4차시 · 사용자 중심 학습 도구 개발하기</p><h2>도구를 뜯어보면</h2><figure><svg viewBox="0 0 980 330" role="img" aria-label="학습 도구에 들어갈 다섯 가지 요소"><defs><marker id="a" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto"><path d="M0 0 L11 4 L0 8 z" fill="#0d9488"/></marker><marker id="g" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto"><path d="M0 0 L11 4 L0 8 z" fill="#9fb8b4"/></marker><marker id="r" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto"><path d="M0 0 L11 4 L0 8 z" fill="#b23a48"/></marker></defs>
+<rect x="286" y="20" width="408" height="296" rx="14" fill="#fff" stroke="#d7e2e0" stroke-width="2"/>
+<rect x="286" y="20" width="408" height="34" rx="14" fill="#eef4f3"/>
+<rect x="286" y="40" width="408" height="14" fill="#eef4f3"/>
+<circle cx="310" cy="37" r="5" fill="#cbd8d6"/><circle cx="326" cy="37" r="5" fill="#cbd8d6"/>
+
+<text x="312" y="86" font-size="16" fill="#5c6b6a">오늘 할 일</text>
+<text x="668" y="86" font-size="16" font-weight="700" fill="#0f766e" text-anchor="end">2 / 4</text>
+<rect x="312" y="96" width="356" height="10" rx="5" fill="#e3ecea"/>
+<rect x="312" y="96" width="178" height="10" rx="5" fill="#0d9488"/>
+
+<rect x="312" y="124" width="266" height="38" rx="9" fill="#fff" stroke="#0d9488" stroke-width="2"/>
+<text x="328" y="149" font-size="16" fill="#93a5a3">무엇을 할까요?</text>
+<rect x="588" y="124" width="80" height="38" rx="9" fill="#0d9488"/>
+<text x="628" y="149" font-size="16" fill="#fff" text-anchor="middle">추가</text>
+
+<g>
+  <rect x="312" y="176" width="356" height="38" rx="9" fill="#f6faf9" stroke="#e3ecea"/>
+  <rect x="328" y="187" width="17" height="17" rx="5" fill="#0d9488"/>
+  <text x="337" y="200" font-size="12" fill="#fff" text-anchor="middle">✓</text>
+  <line x1="358" y1="196" x2="500" y2="196" stroke="#93a5a3" stroke-width="1.6"/>
+  <text x="358" y="201" font-size="15" fill="#93a5a3">수학 문제집 3쪽</text>
+  <text x="652" y="202" font-size="18" fill="#cbd8d6">×</text>
+
+  <rect x="312" y="222" width="356" height="38" rx="9" fill="#f6faf9" stroke="#e3ecea"/>
+  <rect x="328" y="233" width="17" height="17" rx="5" fill="#fff" stroke="#cbd8d6" stroke-width="1.8"/>
+  <text x="358" y="247" font-size="15" fill="#0e1a19">과학 수행평가 준비</text>
+  <text x="652" y="248" font-size="18" fill="#cbd8d6">×</text>
+</g>
+<text x="490" y="292" font-size="13.5" fill="#93a5a3" text-anchor="middle">이 브라우저에만 저장됩니다</text>
+
+<g font-size="16">
+  <path d="M250 101 L306 101" stroke="#0d9488" stroke-width="2.5" marker-end="url(#a)"/>
+  <text x="240" y="106" fill="#0f766e" text-anchor="end">얼마나 했나</text>
+
+  <path d="M250 143 L306 143" stroke="#0d9488" stroke-width="2.5" marker-end="url(#a)"/>
+  <text x="240" y="148" fill="#0f766e" text-anchor="end">입력하는 자리</text>
+
+  <path d="M730 195 L674 195" stroke="#0d9488" stroke-width="2.5" marker-end="url(#a)"/>
+  <text x="740" y="200" fill="#0f766e">끝낸 것 표시</text>
+
+  <path d="M730 241 L674 241" stroke="#0d9488" stroke-width="2.5" marker-end="url(#a)"/>
+  <text x="740" y="246" fill="#0f766e">하나씩 지우기</text>
+
+  <path d="M250 288 L306 288" stroke="#0d9488" stroke-width="2.5" marker-end="url(#a)"/>
+  <text x="240" y="293" fill="#0f766e" text-anchor="end">저장 범위 안내</text>
+</g>
+</svg><figcaption>워크벤치에서 미리보기를 눌러 직접 만져 볼 수 있습니다.</figcaption></figure></section>
+<section class="slide"><p class="eyebrow">4차시 · 사용자 중심 학습 도구 개발하기</p><p class="lead">이제 직접</p><p class="big">24분, 내 도구 만들기</p><p class="sub">화면이 예쁜 것보다 <b>내가 쓸 만한가</b>가 중요합니다.</p></section>
+<section class="slide"><p class="eyebrow">4차시 · 사용자 중심 학습 도구 개발하기</p><h2>오늘 꼭 할 일 — 파일 제출</h2><ul class="pts"><li>캔버스에서 <b>코드 받기</b>로 파일을 받는다</li><li>이름을 <b>todo_이름.html</b>처럼 영문으로 바꾼다</li><li>이름·연락처·학교 이름이 없는지 한 번 더 확인한다</li><li>선생님이 알려 준 곳에 제출한다</li></ul><p class="note">오늘 제출해야 다음 시간에 로그인을 붙일 수 있습니다.</p></section>
+<section class="slide"><p class="eyebrow">4차시 · 사용자 중심 학습 도구 개발하기</p><h2>제출하면 생기는 것</h2><figure><svg viewBox="0 0 980 300" role="img" aria-label="파일 제출에서 주소가 생기기까지"><defs><marker id="a" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto"><path d="M0 0 L11 4 L0 8 z" fill="#0d9488"/></marker><marker id="g" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto"><path d="M0 0 L11 4 L0 8 z" fill="#9fb8b4"/></marker><marker id="r" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto"><path d="M0 0 L11 4 L0 8 z" fill="#b23a48"/></marker></defs>
+<g text-anchor="middle">
+  <rect x="20" y="56" width="212" height="140" rx="16" fill="#fff" stroke="#d7e2e0" stroke-width="2"/>
+  <text x="126" y="108" font-size="34">📄</text>
+  <text x="126" y="142" font-size="19" font-weight="700" fill="#0e1a19">내 파일</text>
+  <text x="126" y="168" font-size="14" fill="#5c6b6a">todo_minsu.html</text>
+
+  <rect x="276" y="56" width="212" height="140" rx="16" fill="#fff" stroke="#d7e2e0" stroke-width="2"/>
+  <text x="382" y="108" font-size="34">📤</text>
+  <text x="382" y="142" font-size="19" font-weight="700" fill="#0e1a19">제출</text>
+  <text x="382" y="168" font-size="14" fill="#5c6b6a">선생님이 모아 올림</text>
+
+  <rect x="532" y="56" width="212" height="140" rx="16" fill="#e8f6f4" stroke="#0d9488" stroke-width="2.5"/>
+  <text x="638" y="108" font-size="34">⏳</text>
+  <text x="638" y="142" font-size="19" font-weight="700" fill="#0f766e">1~2분</text>
+  <text x="638" y="168" font-size="14" fill="#5c6b6a">올라가는 시간</text>
+
+  <rect x="788" y="56" width="172" height="140" rx="16" fill="#0f766e"/>
+  <text x="874" y="108" font-size="34">🌍</text>
+  <text x="874" y="142" font-size="19" font-weight="700" fill="#fff">내 주소</text>
+  <text x="874" y="168" font-size="14" fill="#cdeee8">어디서나 열림</text>
+</g>
+<g stroke="#0d9488" stroke-width="3" marker-end="url(#a)">
+  <line x1="236" y1="126" x2="270" y2="126"/>
+  <line x1="492" y1="126" x2="526" y2="126"/>
+  <line x1="748" y1="126" x2="782" y2="126"/>
+</g>
+<text x="490" y="248" font-size="19" fill="#5c6b6a" text-anchor="middle">
+  주소가 생겨야 <tspan font-weight="700" fill="#0f766e">다음 시간에 로그인</tspan>을 붙일 수 있다</text>
+</svg><figcaption>선생님이 모아서 올리면, 다음 시간에 각자 자기 주소로 들어갑니다.</figcaption></figure></section>
+<section class="slide endslide"><p class="eyebrow">4차시 · 사용자 중심 학습 도구 개발하기</p><p class="lead">다음 시간</p><p class="big">어디서나 열리게 만들기</p><p class="sub">내 주소가 생깁니다. 집에서도 열어 볼 수 있습니다.</p></section>
+  </div>
+  <div class="bar">
+    <button id="prev">← 이전</button>
+    <button id="next">다음 →</button>
+    <span class="count"><b id="cur">1</b> / 10</span>
+    <span class="prog"><i id="fill"></i></span>
+    <a href="index.html">🏠 홈</a>
+    <a href="workbench.html">🛠️ 워크벤치</a>
+    <a href="slides-1.html">1차시</a><a href="slides-2.html">2차시</a><a href="slides-3.html">3차시</a><a href="slides-5.html">5차시</a><a href="slides-6.html">6차시</a>
+  </div>
+</div>
+<script>
+var slides = document.querySelectorAll('.slide');
+var i = 0;
+function show(n){
+  i = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach(function(s, k){ s.classList.toggle('on', k === i); });
+  document.getElementById('cur').textContent = (i + 1);
+  document.getElementById('fill').style.width = ((i + 1) / slides.length * 100) + '%';
+  document.getElementById('prev').disabled = (i === 0);
+  document.getElementById('next').disabled = (i === slides.length - 1);
+  try {
+    if (location.hash !== '#' + (i + 1)) history.replaceState(null, '', '#' + (i + 1));
+  } catch (e) { /* 미리보기 창이나 일부 환경에서는 주소를 바꿀 수 없음 — 넘어감 */ }
+  slides[i].scrollTop = 0;
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); show(i + 1); }
+  if (e.key === 'ArrowLeft'  || e.key === 'PageUp')  { e.preventDefault(); show(i - 1); }
+  if (e.key === 'Home') show(0);
+  if (e.key === 'End')  show(slides.length - 1);
+});
+document.getElementById('prev').addEventListener('click', function(){ show(i - 1); });
+document.getElementById('next').addEventListener('click', function(){ show(i + 1); });
+var t0 = null;
+document.querySelector('.stage').addEventListener('touchstart', function(e){ t0 = e.changedTouches[0].clientX; }, {passive:true});
+document.querySelector('.stage').addEventListener('touchend', function(e){
+  if (t0 === null) return;
+  var d = e.changedTouches[0].clientX - t0;
+  if (Math.abs(d) > 60) show(d < 0 ? i + 1 : i - 1);
+  t0 = null;
+}, {passive:true});
+function fromHash(){
+  var n = 0;
+  try { n = (parseInt((location.hash || '#1').slice(1), 10) - 1) || 0; } catch (e) { n = 0; }
+  return n;
+}
+addEventListener('hashchange', function(){
+  var n = fromHash();
+  if (n !== i) show(n);
+});
+show(fromHash());
+</script>
+</body>
+</html>

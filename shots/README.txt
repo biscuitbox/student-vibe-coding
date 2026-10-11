@@ -1,0 +1,19 @@
+여기에 아래 이름 그대로 PNG 파일을 넣으면 슬라이드·문서의 점선 박스가 자동으로 교체됩니다.
+파일이 없으면 "여기에 ○○ 캡처" 안내 박스가 보입니다.
+
+[학생용 — 이 다섯 장이 가장 중요합니다]
+  gemini_home.png     제미나이 첫 화면 (학교 계정 로그인 후)
+  canvas_button.png   입력창 아래 '캔버스' 버튼이 보이게
+  canvas_result.png   캔버스에 내 소개 페이지가 뜬 화면 (왼쪽 대화 + 오른쪽 미리보기)
+  canvas_export.png   캔버스 오른쪽 위 '코드 받기' 메뉴를 펼친 화면
+  game_demo.png       게임 프롬프트를 넣어 캔버스에 게임이 뜬 화면
+
+[워크벤치 안내용]
+  config_paste.png    워크벤치 5차시의 설정값 복사 버튼
+
+[강사용 — 설정 문서에만 쓰입니다]
+  fb_create.png       파이어베이스 프로젝트 만들기 화면
+  fb_config.png       firebaseConfig 가 표시된 화면
+  ghpages_setting.png 깃허브 Settings -> Pages 화면
+
+(메모장 저장 창과 완성 도구 화면은 슬라이드에 그림으로 그려 넣어서 캡처가 필요 없습니다.)

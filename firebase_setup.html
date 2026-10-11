@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d9488">
+<title>파이어베이스 설정 절차서 · 강사용</title>
+<style>
+  :root{
+    --accent:#0d9488; --accent-dark:#0f766e; --accent-soft:#ccfbf1;
+    --ink:#14201f; --muted:#5c6b6a; --line:#d7e2e0; --bg:#f6faf9; --warn:#b4530a; --warn-soft:#fff4e6;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+    line-height:1.7;font-size:16px}
+  nav{background:#fff;border-bottom:2px solid var(--accent);position:sticky;top:0;z-index:10}
+  nav .in{max-width:900px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px}
+  nav a{color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px;font-size:15px}
+  nav a:hover{background:var(--accent-soft);color:var(--accent-dark)}
+  nav a.on{background:var(--accent);color:#fff}
+  main{max-width:900px;margin:0 auto;padding:24px 16px 80px}
+  h1{font-size:30px;line-height:1.3;margin:12px 0 6px}
+  .sub{color:var(--muted);margin:0 0 28px}
+  h2{font-size:22px;margin:40px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+  h3{font-size:17px;margin:24px 0 8px}
+  .step{background:#fff;border:1px solid var(--line);border-left:5px solid var(--accent);
+    border-radius:10px;padding:16px 18px;margin:14px 0}
+  .step .no{display:inline-block;background:var(--accent);color:#fff;font-weight:700;
+    border-radius:6px;padding:1px 9px;margin-right:8px;font-size:14px}
+  .step h3{margin:0 0 6px;display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+  .step p{margin:6px 0}
+  .step ul{margin:6px 0;padding-left:22px}
+  code{background:#eaf4f2;padding:1px 6px;border-radius:5px;font-size:14px;
+    font-family:ui-monospace,Consolas,monospace;word-break:break-all}
+  pre{background:#11241f;color:#d8f3ec;padding:14px 16px;border-radius:10px;overflow:auto;
+    font-size:13.5px;line-height:1.55;max-height:420px}
+  pre code{background:none;color:inherit;padding:0}
+  .copy{background:var(--accent);color:#fff;border:0;border-radius:8px;padding:9px 16px;
+    font-size:15px;cursor:pointer;font-family:inherit;margin:8px 0}
+  .copy:hover{background:var(--accent-dark)}
+  .copy.done{background:#166534}
+  .warn{background:var(--warn-soft);border:1px solid #f0c391;border-left:5px solid var(--warn);
+    border-radius:10px;padding:14px 16px;margin:16px 0}
+  .warn strong{color:var(--warn)}
+  .shot{border:2px dashed #9fb8b4;border-radius:10px;background:#eef6f4;color:var(--muted);
+    text-align:center;padding:30px 12px;margin:12px 0;font-size:14px}
+  .shot img{max-width:100%;border-radius:6px;display:block}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px;background:#fff}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--accent-soft)}
+  input[type=text],textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;
+    font-family:ui-monospace,Consolas,monospace;font-size:13.5px;background:#fff}
+  textarea{min-height:170px;resize:vertical;line-height:1.5}
+  .out{margin-top:12px}
+  footer{max-width:900px;margin:0 auto;padding:24px 16px 60px;color:var(--muted);font-size:14px;
+    border-top:1px solid var(--line)}
+  @media (max-width:520px){
+    h1{font-size:25px} body{font-size:15px}
+    table,thead,tbody,th,td,tr{display:block}
+    thead{display:none}
+    td{border:0;border-bottom:1px solid var(--line)}
+    td:before{content:attr(data-l);display:block;font-weight:700;color:var(--accent-dark);font-size:13px}
+  }
+</style>
+</head>
+<body>
+<nav><div class="in">
+  <a href="index.html">🏠 홈</a>
+  <a href="workbench.html">🛠️ 실습 워크벤치</a>
+  <a href="playbook.html">📖 초보 가이드북</a>
+  <a href="handout.html">🖨️ 인쇄용 유인물</a>
+  <a class="on" href="firebase_setup.html">🔧 강사 설정</a>
+</div></nav>
+
+<main>
+<h1>파이어베이스 설정 절차서</h1>
+<p class="sub">강사 전용 · 수업 전 한 번만 · 소요 20~30분</p>
+
+<div class="warn">
+  <strong>학생은 이 페이지를 볼 일이 없습니다.</strong>
+  파이어베이스 프로젝트는 선생님이 <b>하나만</b> 만들고, 학생에게는 설정값 한 덩어리만 복사하게 합니다.
+  학생 20명이 각자 콘솔을 만지면 한 차시가 통째로 날아가고, 만 14세 미만은 프로젝트 생성 자체가 막힙니다.
+</div>
+
+<h2>5차시까지 준비해야 할 것</h2>
+<table>
+  <thead><tr><th>준비물</th><th>어디에 쓰나</th></tr></thead>
+  <tbody>
+    <tr><td data-l="준비물">파이어베이스 프로젝트 1개</td><td data-l="어디에 쓰나">반 전체가 공유</td></tr>
+    <tr><td data-l="준비물">구글 로그인 켜기</td><td data-l="어디에 쓰나">5차시 로그인</td></tr>
+    <tr><td data-l="준비물">Firestore 데이터베이스</td><td data-l="어디에 쓰나">할 일·점수 저장</td></tr>
+    <tr><td data-l="준비물">보안 규칙</td><td data-l="어디에 쓰나">남의 데이터 보호 — 가장 중요</td></tr>
+    <tr><td data-l="준비물"><code>firebaseConfig</code> 값</td><td data-l="어디에 쓰나">학생이 복사해 붙여넣음</td></tr>
+  </tbody>
+</table>
+
+<h2>절차</h2>
+
+<div class="step">
+  <h3><span class="no">1</span> 프로젝트 만들기</h3>
+  <p><code>console.firebase.google.com</code> 접속 → 프로젝트 추가 → 이름은 학교·학년이 드러나지 않게 짓습니다(예: <code>web-class-2026</code>).</p>
+  <p><b>Google 애널리틱스는 끄세요.</b> 수업에 필요 없고 설정만 길어집니다.</p>
+  <div class="shot"><img src="shots/fb_create.png" alt="" onerror="this.style.display='none';this.parentNode.insertAdjacentText('beforeend','여기에 프로젝트 만들기 화면 캡처 (shots/fb_create.png)')"></div>
+</div>
+
+<div class="step">
+  <h3><span class="no">2</span> 웹 앱 등록하고 설정값 받기</h3>
+  <p>프로젝트 개요 화면에서 <b>&lt;/&gt;</b> 모양 웹 아이콘을 누릅니다. 앱 닉네임은 아무거나. <b>호스팅 설정은 체크하지 마세요</b>(배포는 깃허브 페이지로 합니다).</p>
+  <p>등록이 끝나면 <code>const firebaseConfig = { ... }</code> 코드 덩어리가 나옵니다. 이걸 통째로 복사해 두세요. 아래 6단계에서 씁니다.</p>
+  <div class="shot"><img src="shots/fb_config.png" alt="" onerror="this.style.display='none';this.parentNode.insertAdjacentText('beforeend','여기에 firebaseConfig 표시 화면 캡처 (shots/fb_config.png)')"></div>
+</div>
+
+<div class="step">
+  <h3><span class="no">3</span> 구글 로그인 켜기</h3>
+  <p>왼쪽 메뉴 <b>빌드 → Authentication → 시작하기 → Google</b> 선택 → 사용 설정 → 지원 이메일을 고르고 저장.</p>
+  <p>다른 로그인 방법은 켜지 마세요. 특히 <b>전화번호 인증은 유료</b>입니다.</p>
+</div>
+
+<div class="step">
+  <h3><span class="no">4</span> 승인된 도메인에 배포 주소 넣기</h3>
+  <p><b>Authentication → 설정 → 승인된 도메인</b>. 여기 없는 주소에서는 로그인 창이 열리지 않습니다.</p>
+  <ul>
+    <li><code>localhost</code> — 보통 이미 들어 있음</li>
+    <li>깃허브 페이지 주소 — <b>배포한 뒤 반드시 추가</b></li>
+  </ul>
+  <p><b>여기에는 도메인만 넣습니다.</b> 배포 주소가 <code>https://내아이디.github.io/web-class/</code>라면 등록할 값은 <code>내아이디.github.io</code>입니다. <code>https://</code>와 뒤쪽 저장소 경로는 빼세요. 경로까지 넣으면 등록이 되지 않습니다.</p>
+  <p>계정 하나에 저장소를 여러 개 만들어도 도메인은 <code>내아이디.github.io</code> 하나뿐이라, 이 값은 한 번만 등록하면 됩니다.</p>
+  <p>6차시에 갑자기 로그인이 안 되는 사고는 대부분 이 단계를 빠뜨려서 생깁니다.</p>
+</div>
+
+<div class="step">
+  <h3><span class="no">5</span> Firestore 만들기</h3>
+  <p><b>빌드 → Firestore Database → 데이터베이스 만들기</b>.</p>
+  <ul>
+    <li>위치: <code>asia-northeast3 (서울)</code></li>
+    <li>모드: <b>프로덕션 모드</b>로 시작 — 다음 단계에서 규칙을 직접 넣습니다</li>
+  </ul>
+  <p>테스트 모드는 30일 뒤 전부 막히는데, 하필 수업 도중에 막히면 복구할 방법이 없습니다.</p>
+</div>
+
+<div class="step">
+  <h3><span class="no">6</span> 보안 규칙 붙여넣기 — 가장 중요</h3>
+  <p><b>Firestore Database → 규칙</b> 탭. 기존 내용을 전부 지우고 아래를 붙여넣은 뒤 <b>게시</b>를 누릅니다.</p>
+  <button class="copy" data-t="rules">보안 규칙 복사</button>
+  <pre id="rules"><code>rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 내 데이터 — 본인만 읽고 쓸 수 있음
+    match /users/{uid}/{document=**} {
+      allow read, write: if request.auth != null
+                         &amp;&amp; request.auth.uid == uid;
+    }
+
+    // 게임 점수 — 누구나 읽기, 자기 기록만 쓰기
+    match /ranking/{docId} {
+      allow read: if true;
+      allow create, update: if request.auth != null
+        &amp;&amp; request.auth.uid == request.resource.data.uid
+        &amp;&amp; request.resource.data.score is number
+        &amp;&amp; request.resource.data.score &gt;= 0
+        &amp;&amp; request.resource.data.score &lt;= 1000000
+        &amp;&amp; request.resource.data.nickname is string
+        &amp;&amp; request.resource.data.nickname.size() &lt;= 12
+        &amp;&amp; request.resource.data.game is string
+        &amp;&amp; request.resource.data.game.size() &lt;= 30;
+      allow delete: if false;
+    }
+
+    // 전시관 작품 목록 — 누구나 읽기, 자기 작품만 쓰기
+    match /gallery/{docId} {
+      allow read: if true;
+      allow create, update: if request.auth != null
+        &amp;&amp; request.auth.uid == request.resource.data.uid
+        &amp;&amp; request.resource.data.title is string
+        &amp;&amp; request.resource.data.title.size() &lt;= 40;
+      allow delete: if false;
+    }
+
+    // 그 외 모든 경로는 차단
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}</code></pre>
+  <p>이 규칙이 하는 일은 딱 세 가지입니다. <b>내 할 일은 나만 본다</b>, <b>점수는 모두가 보되 내 기록만 내가 고친다</b>, <b>지우기는 아무도 못 한다</b>.</p>
+  <div class="warn">
+    <strong>5차시에 학생에게 이 규칙을 직접 읽히세요.</strong>
+    한 줄씩 짚으면서 "이 줄이 없으면 어떻게 되는가"를 물으면 개인정보 보호가 추상적인 구호가 아니라 코드가 됩니다.
+    이 수업에서 가장 값진 10분입니다.
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="no">7</span> 학생 배포용 설정값 만들기</h3>
+  <p>2단계에서 복사한 <code>firebaseConfig</code>를 아래에 붙여넣으면, 학생에게 그대로 줄 코드 블록이 만들어집니다. 워크벤치의 복사 버튼에 넣으세요.</p>
+  <textarea id="cfgin" placeholder='여기에 붙여넣기&#10;&#10;const firebaseConfig = {&#10;  apiKey: "AIza...",&#10;  authDomain: "web-class-2026.firebaseapp.com",&#10;  projectId: "web-class-2026",&#10;  storageBucket: "...",&#10;  messagingSenderId: "...",&#10;  appId: "..."&#10;};'></textarea>
+  <div class="out">
+    <button class="copy" id="gen">학생용 블록 만들기</button>
+    <button class="copy" data-t="stu" id="cpstu" style="display:none">학생용 블록 복사</button>
+    <pre id="stu" style="display:none"><code></code></pre>
+    <p id="msg" style="color:var(--warn);margin:6px 0"></p>
+  </div>
+  <div class="warn">
+    <strong>이 값은 공개되어도 되는 설정값입니다.</strong>
+    <code>apiKey</code>라는 이름 때문에 비밀번호처럼 보이지만, 프로젝트 주소표에 가깝습니다. 실제 방어는 6단계의 보안 규칙이 합니다.
+    다만 <b>서비스 계정 키</b>(<code>.json</code> 파일)는 완전히 다른 물건이니 절대 코드나 화면에 올리지 마세요.
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="no">8</span> 수업 전날 직접 테스트</h3>
+  <ul>
+    <li><code>tool_todo.html</code>을 열어 본인 구글 계정으로 로그인 → 할 일 추가 → 새로고침 후 남아 있는지</li>
+    <li>다른 브라우저(또는 시크릿 창)에서 로그인 → 같은 내용이 보이는지</li>
+    <li><code>tool_gallery.html</code>에서 점수가 랭킹에 올라가는지</li>
+    <li><b>학교 네트워크</b>에서 <code>firebaseapp.com</code>·<code>googleapis.com</code> 접속이 막히지 않는지</li>
+    <li>학생 구글 계정 1개를 빌려 실제로 로그인되는지 — 교육청 계정은 외부 앱 로그인이 차단된 경우가 있습니다</li>
+  </ul>
+  <p>마지막 항목이 이 수업 전체의 단일 최대 위험 요소입니다. 반드시 미리 확인하세요.</p>
+  <div class="warn" style="margin-top:14px">
+    <strong>제미나이 캔버스 안에서는 로그인이 안 될 수 있습니다.</strong>
+    캔버스 미리보기는 안전을 위해 샌드박스에서 돌아가므로 구글 로그인 팝업이 막히는 경우가 있습니다.
+    코드가 틀린 것이 아니니, 학생에게 미리 알려 주고 <b>배포된 자기 주소에서 확인</b>하게 하세요.
+    5차시 설계가 이것 때문에 "붙이고 → 제출 → 배포 → 확인" 순서로 되어 있습니다.
+  </div>
+</div>
+
+<h2>부록 · 깃허브 페이지 배포 절차</h2>
+<p>킷과 학생 작품을 하나의 주소로 올리는 과정입니다. 수업 전에 킷을 먼저 올려 두고, 6차시에 학생 작품만 추가로 올리면 됩니다.</p>
+
+<div class="step">
+  <h3><span class="no">1</span> 저장소 만들기</h3>
+  <p><code>github.com</code> → 로그인 → <b>New repository</b>. 이름은 영문으로(예: <code>web-class</code>).</p>
+  <ul>
+    <li>공개 범위는 <b>Public</b> — 무료 계정은 Public이라야 Pages가 켜집니다</li>
+    <li>Add a README는 체크해도 되고 안 해도 됩니다</li>
+  </ul>
+</div>
+
+<div class="step">
+  <h3><span class="no">2</span> 킷 파일 올리기</h3>
+  <p><b>Add file → Upload files</b>에서 킷 폴더 안의 파일을 전부 끌어다 놓고 <b>Commit changes</b>.</p>
+  <ul>
+    <li><code>index.html</code>이 <b>저장소 맨 위</b>에 있어야 합니다. 폴더째 끌어다 놓으면 한 단계 안으로 들어가 주소가 달라집니다</li>
+    <li><code>shots/</code> 폴더는 캡처를 넣은 뒤 함께 올리세요</li>
+  </ul>
+</div>
+
+<div class="step">
+  <h3><span class="no">3</span> Pages 켜기</h3>
+  <p><b>Settings → Pages</b> → Source를 <code>Deploy from a branch</code>로, Branch를 <code>main</code> / <code>/(root)</code>로 두고 Save.</p>
+  <p>1~2분 뒤 같은 화면 위쪽에 주소가 나타납니다. 모양은 <code>https://아이디.github.io/저장소이름/</code>입니다.</p>
+  <div class="shot"><img src="shots/ghpages_setting.png" alt="" onerror="this.style.display='none';this.parentNode.insertAdjacentText('beforeend','여기에 Settings → Pages 화면 캡처 (shots/ghpages_setting.png)')"></div>
+</div>
+
+<div class="step">
+  <h3><span class="no">4</span> 주소를 파이어베이스에 등록</h3>
+  <p>위 4단계로 돌아가 <b>승인된 도메인</b>에 <code>아이디.github.io</code>를 추가합니다. 이걸 해야 로그인 창이 열립니다.</p>
+</div>
+
+<div class="step">
+  <h3><span class="no">5</span> 학생 작품 올리기 — 세 번 있습니다</h3>
+  <p>학생 파일을 받아 저장소의 <code>works/</code> 폴더에 올립니다. 파일을 한꺼번에 끌어다 놓고 Commit 한 번이면 됩니다.</p>
+  <table style="margin:10px 0">
+    <thead><tr><th>시점</th><th>올릴 것</th><th>왜</th></tr></thead>
+    <tbody>
+      <tr><td data-l="시점"><b>4차시 끝</b></td><td data-l="올릴 것">학습 도구 <code>todo_*.html</code></td>
+          <td data-l="왜">5차시에 각자 주소에서 로그인을 붙이려면 먼저 올라가 있어야 합니다</td></tr>
+      <tr><td data-l="시점"><b>5차시 중간</b></td><td data-l="올릴 것">로그인 붙인 학습 도구</td>
+          <td data-l="왜">학생이 같은 시간에 로그인 작동을 확인합니다</td></tr>
+      <tr><td data-l="시점"><b>6차시 초반</b></td><td data-l="올릴 것">게임 <code>game_*.html</code></td>
+          <td data-l="왜">전시관에 등록할 주소가 생깁니다</td></tr>
+    </tbody>
+  </table>
+  <p>각 작품 주소는 <code>https://아이디.github.io/저장소이름/works/todo_minsu.html</code> 모양이 됩니다.
+     주소 목록을 미리 만들어 두고 학생에게 나눠 주면 빠릅니다.</p>
+  <div class="warn">
+    <strong>5차시 중간 업로드가 이 수업의 유일한 시간 압박 구간입니다.</strong>
+    학생이 14~30분에 작업하고 제출하면, 30분쯤 한 번에 올리고 보안 규칙을 읽는 동안 반영됩니다.
+    38분부터 각자 주소에서 확인하면 딱 맞습니다. 미리 한 번 연습해 두시면 안심입니다.
+  </div>
+</div>
+
+<div class="warn">
+  <strong>반영이 바로 안 될 때</strong>
+  파일을 올린 뒤 주소에 들어가도 예전 화면이 보이면, 브라우저가 이전 내용을 기억하고 있는 것입니다.
+  <b>Ctrl+Shift+R</b>로 새로고침하거나 1~2분 기다리세요. 수업 중에 조급하게 여러 번 올리면 오히려 꼬입니다.
+</div>
+
+<div class="warn">
+  <strong>공개 저장소라는 점</strong>
+  깃허브 페이지의 무료 공개 저장소는 <b>화면뿐 아니라 코드 파일까지</b> 누구나 볼 수 있습니다.
+  학생 실명·사진·연락처가 코드 안에 들어 있지 않은지 올리기 전에 한 번 훑어보세요.
+  파이어베이스 설정값이 코드에 들어 있는 것은 괜찮습니다 — 실제 방어는 6단계의 보안 규칙이 합니다.
+</div>
+
+<h2>요금이 나올 일이 있나</h2>
+<p>무료 Spark 요금제로 충분합니다. 20명이 6차시 동안 쓰는 읽기·쓰기는 무료 한도의 1%도 되지 않습니다.</p>
+<p>다만 학생이 만든 코드에 저장 명령이 반복문 안으로 잘못 들어가면 짧은 시간에 수만 번이 기록될 수 있습니다. <b>결제 정보를 아예 등록하지 마세요.</b> 등록하지 않으면 한도를 넘는 순간 요금이 아니라 기능이 멈춥니다. 수업에서는 그게 안전한 쪽입니다.</p>
+<p>콘솔 <b>사용량 및 청구</b>에서 5차시 직후 한 번 확인해 보시길 권합니다.</p>
+
+<h2>수업이 끝난 뒤</h2>
+<ul>
+  <li>학생 데이터는 구글 계정 UID로만 저장됩니다. 실명은 들어가지 않습니다.</li>
+  <li>학기가 끝나면 Firestore 컬렉션을 삭제하거나 프로젝트 자체를 삭제하세요.</li>
+  <li>학생에게 "네 데이터를 지워 달라고 요청할 수 있다"는 점을 5차시에 알려주세요.</li>
+</ul>
+
+</main>
+<footer>바이브코딩 6차시 · 웹 게임과 웹 도구 만들기 — 강사용 설정 문서 · 2026</footer>
+
+<script>
+document.querySelectorAll('.copy[data-t]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var el=document.getElementById(b.dataset.t);
+    var txt=el.innerText;
+    navigator.clipboard.writeText(txt).then(function(){
+      var o=b.textContent; b.textContent='복사됨!'; b.classList.add('done');
+      setTimeout(function(){b.textContent=o;b.classList.remove('done');},1400);
+    }).catch(function(){
+      var r=document.createRange(); r.selectNodeContents(el);
+      var s=getSelection(); s.removeAllRanges(); s.addRange(r);
+      b.textContent='직접 복사하세요 (Ctrl+C)';
+    });
+  });
+});
+
+document.getElementById('gen').addEventListener('click',function(){
+  var raw=document.getElementById('cfgin').value;
+  var msg=document.getElementById('msg');
+  var keys=['apiKey','authDomain','projectId','appId'];
+  var miss=keys.filter(function(k){return raw.indexOf(k)<0;});
+  if(miss.length){
+    msg.textContent='설정값에 '+miss.join(', ')+' 이(가) 보이지 않습니다. 2단계 화면에서 중괄호까지 통째로 복사해 주세요.';
+    return;
+  }
+  msg.textContent='';
+  var body=raw.substring(raw.indexOf('{'), raw.lastIndexOf('}')+1);
+  var out='// ===== 우리 반 파이어베이스 설정값 =====\n'
+        + '// 이 블록을 프롬프트에 그대로 붙여넣으세요.\n'
+        + 'const firebaseConfig = '+body.trim()+';\n';
+  var pre=document.getElementById('stu');
+  pre.querySelector('code').textContent=out;
+  pre.style.display='block';
+  document.getElementById('cpstu').style.display='inline-block';
+});
+</script>
+</body>
+</html>
