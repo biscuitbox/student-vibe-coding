@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#171A2E">
+<title>제출함 · 바이브코딩으로 만드는 나만의 게임과 학습 도구</title>
+<style>
+  :root{
+    --ink:#171A2E; --paper:#F3F3F8; --white:#fff;
+    --accent:#5B3DF5; --accent-dim:#4A2FD6; --accent-soft:#EDE9FE;
+    --spark:#FFD400; --line:#DCDCE8; --muted:#62648A; --dim:#A8ABD0;
+    --warn:#8a5a00; --warn-soft:#fff4e6;
+    --mono:ui-monospace,Consolas,"D2Coding",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);line-height:1.7;font-size:16px;
+    font-family:-apple-system,"Malgun Gothic","Apple SD Gothic Neo",sans-serif}
+  a{color:var(--accent-dim)}
+  nav{background:var(--ink);position:sticky;top:0;z-index:20}
+  nav .in{max-width:760px;margin:0 auto;padding:9px 18px;display:flex;flex-wrap:wrap;gap:4px}
+  nav a{color:var(--dim);text-decoration:none;padding:7px 11px;border-radius:7px;font-size:15px}
+  nav a:hover{background:#2B3053;color:#fff}
+  nav a.on{background:var(--accent);color:#fff}
+
+  main{max-width:760px;margin:0 auto;padding:26px 18px 90px}
+  h1{font-size:30px;margin:10px 0 5px;letter-spacing:-.03em}
+  .lede{color:var(--muted);margin:0 0 26px;font-size:15.5px}
+  h2{font-size:20px;margin:38px 0 10px;letter-spacing:-.025em}
+  code{background:#EFEDFB;padding:1px 6px;border-radius:5px;font-size:14.5px;
+    font-family:var(--mono)}
+
+  /* 파일 이름 규칙 */
+  .names{border-top:1px solid var(--line)}
+  .names div{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;
+    border-bottom:1px solid var(--line);padding:13px 0}
+  .names b{flex:0 0 auto;min-width:4.2em;font-size:15.5px}
+  .names .f{font-family:var(--mono);font-size:15px;color:var(--accent-dim);font-weight:700}
+  .names span{color:var(--muted);font-size:14.5px}
+
+  /* 제출 전 확인 */
+  .gate{background:var(--white);border:1px solid var(--line);border-radius:12px;
+    padding:20px 22px;margin-top:14px}
+  .gate ul{list-style:none;margin:0;padding:0}
+  .gate li{border-bottom:1px solid var(--line);padding:12px 0}
+  .gate li:last-child{border-bottom:0}
+  .gate label{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+  .gate input{width:21px;height:21px;margin:2px 0 0;flex:0 0 auto;accent-color:var(--accent);
+    cursor:pointer}
+  .gate b{display:block;font-size:16.5px}
+  .gate em{font-style:normal;color:var(--muted);font-size:14.5px;display:block;margin-top:2px}
+
+  /* 제출 버튼 */
+  .act{margin-top:20px}
+  .act a.go{display:flex;align-items:center;justify-content:center;gap:10px;
+    background:var(--accent);color:#fff;text-decoration:none;border-radius:12px;
+    padding:20px 24px;font-size:20px;font-weight:700;letter-spacing:-.02em;
+    transition:background .15s}
+  .act a.go:hover{background:var(--accent-dim)}
+  .act a.go[aria-disabled="true"]{background:#B9BAD2;pointer-events:none}
+  .act .hint{text-align:center;color:var(--muted);font-size:14.5px;margin:10px 0 0}
+  .act .hint.ready{color:var(--accent-dim);font-weight:700}
+
+  /* 주소가 아직 없을 때 */
+  .empty{background:var(--warn-soft);border:1px solid #f0c391;border-left:5px solid var(--warn);
+    border-radius:12px;padding:18px 21px;color:#5f4110}
+  .empty b{color:var(--warn);display:block;margin-bottom:5px;font-size:17px}
+  .empty p{margin:0}
+
+  .after{background:var(--white);border:1px solid var(--line);border-radius:12px;
+    padding:17px 21px}
+  .after p{margin:0 0 9px} .after p:last-child{margin:0}
+  .after .url{font-family:var(--mono);font-size:14px;color:var(--accent-dim);
+    word-break:break-all}
+
+  .teacher{background:var(--ink);color:#C7CAE8;border-radius:12px;padding:18px 21px;
+    margin-top:40px;font-size:14.5px;line-height:1.75}
+  .teacher b{color:#fff;display:block;margin-bottom:6px;font-size:16px}
+  .teacher a{color:var(--spark)}
+  .teacher code{background:#2B3053;color:#E4E2FA;font-size:13.5px}
+  .teacher ol{margin:8px 0 0;padding-left:20px} .teacher li{margin:4px 0}
+
+  footer{max-width:760px;margin:0 auto;padding:24px 18px 70px;color:var(--muted);
+    font-size:14px;border-top:1px solid var(--line)}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  nav :focus-visible{outline-color:var(--spark)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  @media (max-width:520px){
+    body{font-size:15px} h1{font-size:25px} main{padding:20px 14px 70px}
+    .act a.go{font-size:18px;padding:17px 18px}
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="in">
+  <a href="index.html">🏠 홈</a>
+  <a href="slides-1.html">📺 강의 슬라이드</a>
+  <a href="workbench.html">🛠️ 실습 워크벤치</a>
+  <a href="playbook.html">📖 초보 가이드북</a>
+  <a href="handout.html">🖨️ 인쇄용 유인물</a>
+  <a class="on" href="submit.html">📤 제출함</a>
+</div></nav>
+
+<main>
+  <h1>제출함</h1>
+  <p class="lede">만든 파일을 여기로 냅니다. 4차시와 6차시에 한 번씩 냅니다.</p>
+
+  <h2>무엇을 내나요</h2>
+  <div class="names">
+    <div><b>4차시</b><span class="f">todo_이름.html</span><span>내가 만든 학습 도구</span></div>
+    <div><b>6차시</b><span class="f">game_이름.html</span><span>내가 만든 게임</span></div>
+  </div>
+  <p style="color:var(--muted);font-size:14.5px;margin-top:10px">
+    이름은 <b>영문</b>으로 적습니다. 한글이나 띄어쓰기가 들어가면 주소가 깨집니다.
+    예를 들어 민수라면 <code>todo_minsu.html</code>입니다.</p>
+
+  <h2>내기 전에 세 가지만</h2>
+  <div class="gate">
+    <ul>
+      <li><label>
+        <input type="checkbox" class="ck">
+        <span><b>파일 이름이 영문이고 <code>.html</code>로 끝난다</b>
+        <em>메모장으로 열린다면 이름이 <code>.html.txt</code>입니다. 고쳐서 내세요.</em></span>
+      </label></li>
+      <li><label>
+        <input type="checkbox" class="ck">
+        <span><b>내 이름·연락처·학교 이름이 들어 있지 않다</b>
+        <em>이 파일은 인터넷에 올라가 누구나 볼 수 있게 됩니다. 별명을 쓰세요.</em></span>
+      </label></li>
+      <li><label>
+        <input type="checkbox" class="ck">
+        <span><b>내 컴퓨터에서 한 번 열어서 잘 돌아간다</b>
+        <em>파일을 더블클릭해 브라우저에서 눌러 봤습니다.</em></span>
+      </label></li>
+    </ul>
+  </div>
+
+  <div class="act" id="act"></div>
+
+  <h2>내고 나면</h2>
+  <div class="after">
+    <p>선생님이 모아서 인터넷에 올립니다. 올라가면 내 작품에 주소가 하나 생깁니다.</p>
+    <p class="url">biscuitbox.github.io/student-vibe-coding/works/todo_minsu.html</p>
+    <p>4차시에 낸 것은 <b>5차시 시작할 때</b>, 6차시에 낸 것은 <b>그 시간 안에</b> 주소가 나옵니다.
+       주소는 유인물의 '내 주소 적어 두기' 칸에 적어 두세요.</p>
+  </div>
+
+  <div class="teacher">
+    <b>강사용 — 제출 주소를 넣는 곳</b>
+    이 페이지는 주소 한 줄만 바꾸면 킷 전체의 '제출하기' 버튼이 그곳을 가리킵니다.
+    <ol>
+      <li>깃허브에서 <code>submit.html</code>을 열고 연필(Edit) 누르기</li>
+      <li>파일 맨 아래 <code>▼ 여기 한 줄만 바꾸세요 ▼</code> 표시 바로 아래 줄 찾기</li>
+      <li>따옴표 안에 구글 설문지나 공유 폴더 주소를 붙여넣기</li>
+      <li>Commit changes</li>
+    </ol>
+    구글 설문지에 <b>파일 업로드</b> 문항을 넣어 쓰는 방법을 권합니다.
+    학교 구글 계정으로 바로 되고, 낸 파일이 드라이브 한 폴더에 모여 통째로 내려받을 수 있습니다.
+    자세한 절차는 <a href="firebase_setup.html">설정 문서</a>에 있습니다.
+  </div>
+</main>
+
+<footer>
+  바이브코딩으로 만드는 나만의 게임과 학습 도구 · 중학생 6차시 · 2026<br>
+  강사 김시명 · 해연중학교
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════════════
+//  ▼ 여기 한 줄만 바꾸세요 ▼
+//  구글 설문지 또는 공유 폴더 주소를 따옴표 안에 붙여넣습니다.
+//  예: var 제출주소 = "https://forms.gle/abcd1234";
+var 제출주소 = "";
+//  ▲ 여기까지 ▲
+// ══════════════════════════════════════════════════════════
+
+(function(){
+  var act = document.getElementById('act');
+  var url = String(제출주소 || '').trim();
+
+  if (!url) {
+    act.innerHTML =
+      '<div class="empty"><b>아직 제출 주소가 연결되지 않았습니다</b>' +
+      '<p>선생님께 말씀드리세요. 그동안 만든 파일은 바탕화면 내 폴더에 그대로 두면 됩니다.</p></div>';
+    return;
+  }
+
+  act.innerHTML =
+    '<a class="go" id="go" href="' + url.replace(/"/g, '&quot;') + '"' +
+    ' target="_blank" rel="noopener" aria-disabled="true">📤 제출하러 가기</a>' +
+    '<p class="hint" id="hint">위 세 가지를 확인하면 열립니다</p>';
+
+  var go = document.getElementById('go'),
+      hint = document.getElementById('hint'),
+      cks = document.querySelectorAll('.ck');
+
+  function check(){
+    var done = 0;
+    cks.forEach(function(c){ if (c.checked) done++; });
+    var all = (done === cks.length);
+    go.setAttribute('aria-disabled', all ? 'false' : 'true');
+    hint.classList.toggle('ready', all);
+    hint.textContent = all
+      ? '확인했습니다. 눌러서 제출하세요'
+      : '위 세 가지를 확인하면 열립니다 (' + done + '/' + cks.length + ')';
+  }
+  cks.forEach(function(c){ c.addEventListener('change', check); });
+  check();
+})();
+</script>
+</body>
+</html>

@@ -75,6 +75,15 @@ pre code{background:none;color:inherit;padding:0}
   border-radius:11px;padding:13px 16px;margin-top:14px;font-size:14.5px;line-height:1.75;color:#5f4110}
 .tip b{color:var(--warn);display:block;margin-bottom:4px}
 .tip p{margin:0}
+.submit{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  flex-wrap:wrap;background:var(--ink);color:#fff;text-decoration:none;border-radius:10px;
+  padding:16px 20px;margin-top:16px}
+.submit:hover{background:#232846}
+.submit .t b{display:block;font-size:17.5px;letter-spacing:-.02em}
+.submit .t em{font-style:normal;color:#A8ABD0;font-size:14.5px;display:block;margin-top:2px}
+.submit .t code{background:#2B3053;color:#E4E2FA;font-size:13.5px}
+.submit .go{background:var(--accent);color:#fff;border-radius:8px;padding:9px 16px;
+  font-size:15px;white-space:nowrap;flex:0 0 auto}
 .ideas{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin:14px 0}
 .idea{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:13px 15px;
   display:flex;flex-direction:column;gap:2px}
@@ -102,7 +111,7 @@ nav :focus-visible{outline-color:#FFD400}
 </style>
 </head>
 <body>
-<nav><div class="in"><a href="index.html">🏠 홈</a><a href="slides-1.html">📺 강의 슬라이드</a><a class="on" href="workbench.html">🛠️ 실습 워크벤치</a><a href="playbook.html">📖 초보 가이드북</a><a href="handout.html">🖨️ 인쇄용 유인물</a></div></nav>
+<nav><div class="in"><a href="index.html">🏠 홈</a><a href="slides-1.html">📺 강의 슬라이드</a><a class="on" href="workbench.html">🛠️ 실습 워크벤치</a><a href="playbook.html">📖 초보 가이드북</a><a href="handout.html">🖨️ 인쇄용 유인물</a><a href="submit.html">📤 제출함</a></div></nav>
 <main>
 <h1>실습 워크벤치</h1>
 <p class="lead">바이브코딩으로 만드는 나만의 게임과 학습 도구 · 프롬프트와 완성 코드를 한곳에</p>
@@ -182,10 +191,10 @@ nav :focus-visible{outline-color:#FFD400}
 &lt;head&gt;
 &lt;meta charset="UTF-8"&gt;
 &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-&lt;meta name="theme-color" content="#0d9488"&gt;
+&lt;meta name="theme-color" content="#5B3DF5"&gt;
 &lt;title&gt;반응속도 · 5번의 찰나&lt;/title&gt;
 &lt;style&gt;
-  :root{--accent:#0d9488;--ink:#14201f;--muted:#5c6b6a;--line:#d7e2e0;--bg:#f6faf9}
+  :root{--accent:#5B3DF5;--ink:#171A2E;--muted:#62648A;--line:#DCDCE8;--bg:#F3F3F8}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);
     font-family:-apple-system,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
@@ -193,21 +202,21 @@ nav :focus-visible{outline-color:#FFD400}
   h1{font-size:26px;margin:6px 0 2px}
   .sub{color:var(--muted);font-size:15px;margin:0 0 18px;text-align:center}
   .board{width:100%;max-width:460px}
-  .pad{height:280px;border-radius:16px;display:flex;flex-direction:column;
+  .pad{height:280px;border-radius:10px;display:flex;flex-direction:column;
     align-items:center;justify-content:center;cursor:pointer;user-select:none;
-    background:#33474a;color:#fff;text-align:center;padding:16px;
+    background:#353A5E;color:#fff;text-align:center;padding:16px;
     transition:background .08s linear;border:0;width:100%;font-family:inherit}
   .pad b{font-size:26px;display:block;margin-bottom:6px}
   .pad span{font-size:16px;opacity:.85;line-height:1.6}
-  .pad.wait{background:#b23a48}
+  .pad.wait{background:#D9435A}
   .pad.go{background:#15803d}
   .pad.early{background:#8a5a00}
   .pad:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
   .rounds{display:flex;gap:6px;justify-content:center;margin:14px 0}
-  .dot{width:38px;height:38px;border-radius:9px;background:#e3ecea;border:1px solid var(--line);
+  .dot{width:38px;height:38px;border-radius:9px;background:#E4E4EF;border:1px solid var(--line);
     display:flex;align-items:center;justify-content:center;font-size:12.5px;color:var(--muted)}
   .dot.on{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:16px}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:16px}
   .score{font-size:42px;font-weight:700;color:var(--accent);line-height:1.1}
   .label{color:var(--muted);font-size:14px}
   .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
@@ -352,11 +361,11 @@ bestEl.textContent = loadBest();
 &lt;head&gt;
 &lt;meta charset="UTF-8"&gt;
 &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-&lt;meta name="theme-color" content="#0d9488"&gt;
+&lt;meta name="theme-color" content="#5B3DF5"&gt;
 &lt;title&gt;숫자 맞히기 · 여덟 번의 질문&lt;/title&gt;
 &lt;style&gt;
-  :root{--accent:#0d9488;--ink:#14201f;--muted:#5c6b6a;--line:#d7e2e0;--bg:#f6faf9;
-        --up:#1d4ed8;--down:#b23a48;--hit:#15803d}
+  :root{--accent:#5B3DF5;--ink:#171A2E;--muted:#62648A;--line:#DCDCE8;--bg:#F3F3F8;
+        --up:#1d4ed8;--down:#D9435A;--hit:#15803d}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);
     font-family:-apple-system,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
@@ -364,11 +373,11 @@ bestEl.textContent = loadBest();
   h1{font-size:26px;margin:6px 0 2px}
   .sub{color:var(--muted);font-size:15px;margin:0 0 18px;text-align:center}
   .board{width:100%;max-width:440px}
-  .range{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center}
+  .range{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px;text-align:center}
   .range .big{font-size:34px;font-weight:700;letter-spacing:-1px}
   .range .big i{font-style:normal;color:var(--accent)}
   .range .lbl{color:var(--muted);font-size:14px;margin-bottom:4px}
-  .bar{height:10px;border-radius:5px;background:#e3ecea;margin:14px 0 4px;position:relative;overflow:hidden}
+  .bar{height:10px;border-radius:5px;background:#E4E4EF;margin:14px 0 4px;position:relative;overflow:hidden}
   .bar i{position:absolute;top:0;bottom:0;background:var(--accent);opacity:.35;display:block}
   form{display:flex;gap:8px;margin-top:14px}
   input[type=number]{flex:1;padding:14px;font-size:20px;text-align:center;border:1px solid var(--line);
@@ -376,13 +385,13 @@ bestEl.textContent = loadBest();
   input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
   button{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:0 20px;
     font-size:16px;cursor:pointer;font-family:inherit}
-  button:disabled{background:#9db8b5;cursor:default}
+  button:disabled{background:#AAABC6;cursor:default}
   .log{margin-top:14px;display:flex;flex-direction:column;gap:6px}
   .try{display:flex;justify-content:space-between;align-items:center;background:#fff;
     border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:15px}
   .try b{font-size:19px}
   .try .up{color:var(--up)} .try .down{color:var(--down)} .try .hit{color:var(--hit);font-weight:700}
-  .panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:16px}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:16px}
   .score{font-size:42px;font-weight:700;color:var(--accent);line-height:1.1}
   .label{color:var(--muted);font-size:14px}
   .row{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;
@@ -390,6 +399,9 @@ bestEl.textContent = loadBest();
   .row:last-child{border:0}
   .again{width:100%;padding:12px;margin-top:12px}
   .note{color:var(--muted);font-size:13px;margin-top:18px;text-align:center;max-width:440px;line-height:1.6}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  nav :focus-visible{outline-color:#FFD400}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -523,10 +535,10 @@ start();
 &lt;head&gt;
 &lt;meta charset="UTF-8"&gt;
 &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-&lt;meta name="theme-color" content="#0d9488"&gt;
+&lt;meta name="theme-color" content="#5B3DF5"&gt;
 &lt;title&gt;두더지 잡기 · 30초&lt;/title&gt;
 &lt;style&gt;
-  :root{--accent:#0d9488;--ink:#14201f;--muted:#5c6b6a;--line:#d7e2e0;--bg:#f6faf9;--bad:#b23a48}
+  :root{--accent:#5B3DF5;--ink:#171A2E;--muted:#62648A;--line:#DCDCE8;--bg:#F3F3F8;--bad:#D9435A}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);
     font-family:-apple-system,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
@@ -541,15 +553,15 @@ start();
   .hud .v{font-size:25px;font-weight:700;line-height:1.2}
   .hud .v.low{color:var(--bad)}
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  .hole{aspect-ratio:1;border-radius:14px;background:#dfeae8;border:1px solid var(--line);
+  .hole{aspect-ratio:1;border-radius:10px;background:#E4E4EF;border:1px solid var(--line);
     display:flex;align-items:center;justify-content:center;font-size:40px;cursor:pointer;
     user-select:none;padding:0;font-family:inherit;transition:background .1s}
   .hole:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-  .hole.up{background:#c9ebe4}
-  .hole.bomb{background:#f3d9d9}
+  .hole.up{background:#DCD5FA}
+  .hole.bomb{background:#FADCE0}
   .hole.hit{background:var(--accent)}
-  .hole.miss{background:#eecccc}
-  .panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:16px}
+  .hole.miss{background:#F3CBD2}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:16px}
   .score{font-size:42px;font-weight:700;color:var(--accent);line-height:1.1}
   .label{color:var(--muted);font-size:14px}
   .row{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;
@@ -797,11 +809,11 @@ function gameOver(score){
 &lt;head&gt;
 &lt;meta charset="UTF-8"&gt;
 &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-&lt;meta name="theme-color" content="#0d9488"&gt;
+&lt;meta name="theme-color" content="#5B3DF5"&gt;
 &lt;title&gt;오늘 할 일 · 내 컴퓨터에만 저장&lt;/title&gt;
 &lt;style&gt;
-  :root{--accent:#0d9488;--accent-dark:#0f766e;--ink:#14201f;--muted:#5c6b6a;
-        --line:#d7e2e0;--bg:#f6faf9;--done:#93a5a3}
+  :root{--accent:#5B3DF5;--accent-dark:#4A2FD6;--ink:#171A2E;--muted:#62648A;
+        --line:#DCDCE8;--bg:#F3F3F8;--done:#9A9CBC}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);
     font-family:-apple-system,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
@@ -810,11 +822,11 @@ function gameOver(score){
   header{margin-bottom:18px}
   h1{font-size:27px;margin:0 0 2px}
   .date{color:var(--muted);font-size:15px;margin:0}
-  .progress{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px}
+  .progress{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:14px}
   .ptop{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
   .ptop b{font-size:25px}
   .ptop span{color:var(--muted);font-size:14px}
-  .bar{height:12px;border-radius:6px;background:#e3ecea;overflow:hidden}
+  .bar{height:12px;border-radius:6px;background:#E4E4EF;overflow:hidden}
   .bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .25s ease}
   form{display:flex;gap:8px;margin-bottom:14px}
   input[type=text]{flex:1;padding:13px 14px;font-size:16px;border:1px solid var(--line);
@@ -833,16 +845,19 @@ function gameOver(score){
   li .txt{flex:1;font-size:16px;word-break:break-all;line-height:1.5}
   li.done .txt{color:var(--done);text-decoration:line-through}
   li .del{background:none;color:var(--muted);font-size:19px;padding:0 4px;line-height:1}
-  li .del:hover{background:none;color:#b23a48}
+  li .del:hover{background:none;color:#D9435A}
   .empty{background:#fff;border:1px dashed var(--line);border-radius:12px;padding:34px 18px;
     text-align:center;color:var(--muted);line-height:1.7}
   .tools{display:flex;justify-content:space-between;align-items:center;margin-top:16px;
     color:var(--muted);font-size:14px}
   .tools button{background:none;color:var(--muted);font-size:14px;padding:6px 10px;
     border:1px solid var(--line);border-radius:8px}
-  .tools button:hover{background:#eef4f3;color:var(--ink)}
+  .tools button:hover{background:#F0EFF9;color:var(--ink)}
   .note{background:#fff8e8;border:1px solid #f0dcb0;border-radius:11px;padding:13px 15px;
     margin-top:22px;font-size:14px;line-height:1.7;color:#6b4e12}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  nav :focus-visible{outline-color:#FFD400}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -973,6 +988,7 @@ render();
 <br><br><b>더 해 볼 요청</b><br>
 "할 일에 중요 표시를 달 수 있게 해 줘. 중요한 건 위로 올라오게."<br>
 "어제 못 끝낸 일이 오늘 목록에 남아 있게 해 줘.</p></div>
+<a class="submit" href="submit.html"><span class="t"><b>📤 오늘 제출하기</b><em>오늘 만든 학습 도구 — 파일 이름 <code>todo_이름.html</code></em></span><span class="go">제출함 열기</span></a>
 </section>
 <section class="lab" id="l5">
 <div class="labhead"><span class="em">🔐</span><div><h2>5차시 · 계정 인증과 클라우드 데이터베이스 연동하기</h2><p>로그인하면 집에서도 내 것이 그대로</p></div></div>
@@ -1016,11 +1032,11 @@ const firebaseConfig = {
 &lt;head&gt;
 &lt;meta charset="UTF-8"&gt;
 &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-&lt;meta name="theme-color" content="#0d9488"&gt;
+&lt;meta name="theme-color" content="#5B3DF5"&gt;
 &lt;title&gt;내 할 일 · 어디서나 열리는 목록&lt;/title&gt;
 &lt;style&gt;
-  :root{--accent:#0d9488;--accent-dark:#0f766e;--ink:#14201f;--muted:#5c6b6a;
-        --line:#d7e2e0;--bg:#f6faf9;--done:#93a5a3;--warn:#8a5a00}
+  :root{--accent:#5B3DF5;--accent-dark:#4A2FD6;--ink:#171A2E;--muted:#62648A;
+        --line:#DCDCE8;--bg:#F3F3F8;--done:#9A9CBC;--warn:#8a5a00}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);
     font-family:-apple-system,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
@@ -1029,13 +1045,13 @@ const firebaseConfig = {
   .bar-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}
   h1{font-size:26px;margin:0}
   .who{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
-  .who img{width:30px;height:30px;border-radius:50%;background:#dfeae8}
+  .who img{width:30px;height:30px;border-radius:50%;background:#E4E4EF}
   button{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 18px;
     font-size:15px;cursor:pointer;font-family:inherit}
   button:hover{background:var(--accent-dark)}
   button.ghost{background:none;color:var(--muted);border:1px solid var(--line);padding:7px 12px;font-size:14px}
-  button.ghost:hover{background:#eef4f3;color:var(--ink)}
-  .gate{background:#fff;border:1px solid var(--line);border-radius:16px;padding:34px 24px;text-align:center}
+  button.ghost:hover{background:#F0EFF9;color:var(--ink)}
+  .gate{background:#fff;border:1px solid var(--line);border-radius:10px;padding:34px 24px;text-align:center}
   .gate h2{font-size:21px;margin:0 0 10px}
   .gate p{color:var(--muted);line-height:1.75;margin:0 0 20px;font-size:15px}
   .gate button{font-size:16px;padding:13px 26px}
@@ -1046,11 +1062,11 @@ const firebaseConfig = {
   .banner{background:#fff4e6;border:1px solid #f0c391;border-left:5px solid var(--warn);
     border-radius:11px;padding:13px 15px;font-size:14.5px;line-height:1.7;color:#6b4412;margin-bottom:14px}
   .banner b{color:var(--warn)}
-  .progress{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px}
+  .progress{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:14px}
   .ptop{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
   .ptop b{font-size:24px}
   .ptop span{color:var(--muted);font-size:14px}
-  .bar{height:12px;border-radius:6px;background:#e3ecea;overflow:hidden}
+  .bar{height:12px;border-radius:6px;background:#E4E4EF;overflow:hidden}
   .bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .25s ease}
   form{display:flex;gap:8px;margin-bottom:14px}
   input[type=text]{flex:1;padding:13px 14px;font-size:16px;border:1px solid var(--line);
@@ -1066,7 +1082,7 @@ const firebaseConfig = {
   li .txt{flex:1;font-size:16px;word-break:break-all;line-height:1.5}
   li.done .txt{color:var(--done);text-decoration:line-through}
   li .del{background:none;color:var(--muted);font-size:19px;padding:0 4px;line-height:1}
-  li .del:hover{background:none;color:#b23a48}
+  li .del:hover{background:none;color:#D9435A}
   .empty{background:#fff;border:1px dashed var(--line);border-radius:12px;padding:32px 18px;
     text-align:center;color:var(--muted);line-height:1.7}
   .tools{display:flex;justify-content:space-between;align-items:center;margin-top:16px;
@@ -1074,6 +1090,9 @@ const firebaseConfig = {
   .privacy{margin-top:24px;font-size:13.5px;color:var(--muted);line-height:1.8;
     border-top:1px solid var(--line);padding-top:14px}
   .hide{display:none}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  nav :focus-visible{outline-color:#FFD400}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -1138,10 +1157,12 @@ const firebaseConfig = {
    강사가 준 블록으로 아래를 통째로 바꾸세요.
    ========================================================= */
 const firebaseConfig = {
-  apiKey: "여기에-우리반-설정값을-붙여넣으세요",
-  authDomain: "프로젝트이름.firebaseapp.com",
-  projectId: "프로젝트이름",
-  appId: "앱아이디"
+  apiKey: "AIzaSyCxGZMzPDYXnkSdlqMXNanMGKO24RbdiI8",
+  authDomain: "student-vibe-coding.firebaseapp.com",
+  projectId: "student-vibe-coding",
+  storageBucket: "student-vibe-coding.firebasestorage.app",
+  messagingSenderId: "358029692461",
+  appId: "1:358029692461:web:5c0972625348118ed6b2a4"
 };
 /* ========================================================= */
 
@@ -1324,6 +1345,7 @@ if (!READY){
 <code>permission-denied</code> — 보안 규칙이 막은 것입니다. 저장하려는 위치가 <code>users/내uid/</code> 안인지 확인하세요.
 <br><br><b>여기서 꼭 짚을 것</b><br>
 친구 계정으로 로그인하면 내 목록이 보이지 않습니다. 그걸 막는 게 보안 규칙 한 줄입니다.</p></div>
+<a class="submit" href="submit.html"><span class="t"><b>📤 오늘 제출하기</b><em>로그인을 붙인 학습 도구 — 다시 제출 — 파일 이름 <code>todo_이름.html</code></em></span><span class="go">제출함 열기</span></a>
 </section>
 <section class="lab" id="l6">
 <div class="labhead"><span class="em">🌍</span><div><h2>6차시 · 웹 서비스 배포하고 공유하기</h2><p>주소가 생기면 친구가 내 게임을 한다</p></div></div>
@@ -1389,11 +1411,11 @@ async function uploadScore(score){
 &lt;head&gt;
 &lt;meta charset="UTF-8"&gt;
 &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-&lt;meta name="theme-color" content="#0d9488"&gt;
+&lt;meta name="theme-color" content="#5B3DF5"&gt;
 &lt;title&gt;우리 반 전시관&lt;/title&gt;
 &lt;style&gt;
-  :root{--accent:#0d9488;--accent-dark:#0f766e;--accent-soft:#ccfbf1;--ink:#14201f;
-        --muted:#5c6b6a;--line:#d7e2e0;--bg:#f6faf9;--warn:#8a5a00;--gold:#b7791f}
+  :root{--accent:#5B3DF5;--accent-dark:#4A2FD6;--accent-soft:#EDE9FE;--ink:#171A2E;
+        --muted:#62648A;--line:#DCDCE8;--bg:#F3F3F8;--warn:#8a5a00;--gold:#B07A00}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);
     font-family:-apple-system,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
@@ -1403,16 +1425,16 @@ async function uploadScore(score){
   h1{font-size:28px;margin:0}
   .lead{color:var(--muted);margin:0 0 18px;font-size:15px}
   .who{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
-  .who img{width:30px;height:30px;border-radius:50%;background:#dfeae8}
+  .who img{width:30px;height:30px;border-radius:50%;background:#E4E4EF}
   button{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 18px;
     font-size:15px;cursor:pointer;font-family:inherit}
   button:hover{background:var(--accent-dark)}
   button.ghost{background:none;color:var(--muted);border:1px solid var(--line);padding:7px 12px;font-size:14px}
-  button.ghost:hover{background:#eef4f3;color:var(--ink)}
+  button.ghost:hover{background:#F0EFF9;color:var(--ink)}
   .banner{background:#fff4e6;border:1px solid #f0c391;border-left:5px solid var(--warn);
     border-radius:11px;padding:13px 15px;font-size:14.5px;line-height:1.7;color:#6b4412;margin-bottom:16px}
   .banner b{color:var(--warn)}
-  .gate{background:#fff;border:1px solid var(--line);border-radius:16px;padding:34px 24px;text-align:center}
+  .gate{background:#fff;border:1px solid var(--line);border-radius:10px;padding:34px 24px;text-align:center}
   .gate h2{font-size:21px;margin:0 0 10px}
   .gate p{color:var(--muted);line-height:1.75;margin:0 0 20px;font-size:15px}
   .tabs{display:flex;gap:6px;margin:18px 0 14px;border-bottom:2px solid var(--line)}
@@ -1421,15 +1443,15 @@ async function uploadScore(score){
   .tabs button.on{color:var(--accent-dark);border-bottom-color:var(--accent);font-weight:700}
   .tabs button:hover{background:none;color:var(--ink)}
   .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;
+  .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;
     display:flex;flex-direction:column;gap:7px}
   .card h3{margin:0;font-size:17px;line-height:1.4;word-break:break-all}
   .card .by{color:var(--muted);font-size:13.5px}
-  .card p{margin:0;font-size:14.5px;color:#3c4d4b;line-height:1.6;word-break:break-all}
+  .card p{margin:0;font-size:14.5px;color:#3A3C5C;line-height:1.6;word-break:break-all}
   .card a{margin-top:auto;display:inline-block;background:var(--accent);color:#fff;
     text-decoration:none;text-align:center;border-radius:9px;padding:10px;font-size:15px}
   .card a:hover{background:var(--accent-dark)}
-  .rank{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px}
+  .rank{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:12px}
   .rank h3{margin:0 0 10px;font-size:17px;display:flex;justify-content:space-between;align-items:baseline}
   .rank h3 span{font-size:13px;color:var(--muted);font-weight:400}
   .rk{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:15px}
@@ -1439,7 +1461,7 @@ async function uploadScore(score){
   .rk .who2{flex:1;word-break:break-all}
   .rk .sc{font-weight:700;font-size:17px}
   .rk.me{background:var(--accent-soft);border-radius:8px;padding:8px 10px;margin:0 -10px}
-  .panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:14px}
   .panel h3{margin:0 0 4px;font-size:17px}
   .panel .hint{color:var(--muted);font-size:14px;margin:0 0 12px;line-height:1.6}
   .field{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
@@ -1450,10 +1472,13 @@ async function uploadScore(score){
   .empty{background:#fff;border:1px dashed var(--line);border-radius:12px;padding:34px 18px;
     text-align:center;color:var(--muted);line-height:1.7}
   .msg{font-size:14px;margin-top:8px;min-height:20px}
-  .msg.ok{color:var(--accent-dark)} .msg.no{color:#b23a48}
+  .msg.ok{color:var(--accent-dark)} .msg.no{color:#D9435A}
   .safe{margin-top:26px;font-size:13.5px;color:var(--muted);line-height:1.8;
     border-top:1px solid var(--line);padding-top:14px}
   .hide{display:none}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  nav :focus-visible{outline-color:#FFD400}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -1533,10 +1558,12 @@ async function uploadScore(score){
    우리 반 파이어베이스 설정값 — 강사가 준 블록으로 바꾸세요
    ========================================================= */
 const firebaseConfig = {
-  apiKey: "여기에-우리반-설정값을-붙여넣으세요",
-  authDomain: "프로젝트이름.firebaseapp.com",
-  projectId: "프로젝트이름",
-  appId: "앱아이디"
+  apiKey: "AIzaSyCxGZMzPDYXnkSdlqMXNanMGKO24RbdiI8",
+  authDomain: "student-vibe-coding.firebaseapp.com",
+  projectId: "student-vibe-coding",
+  storageBucket: "student-vibe-coding.firebasestorage.app",
+  messagingSenderId: "358029692461",
+  appId: "1:358029692461:web:5c0972625348118ed6b2a4"
 };
 /* ========================================================= */
 
@@ -1728,6 +1755,7 @@ async function loadRanking(){
 1. 별명 저장 → 2. 게임 이름·설명·주소 등록 → 3. 친구 게임 해 보기 → 4. 내 점수 올리기
 <br><br><b>남은 시간은 자유 플레이로</b><br>
 마지막 15분은 아무것도 시키지 말고 서로의 게임을 하게 두세요. 이 수업의 보상은 거기에 있습니다.</p></div>
+<a class="submit" href="submit.html"><span class="t"><b>📤 오늘 제출하기</b><em>내가 만든 게임 — 파일 이름 <code>game_이름.html</code></em></span><span class="go">제출함 열기</span></a>
 </section>
 <h2 class="sec" id="formula">프롬프트 작성 공식</h2>
 <p style="margin:0;color:var(--muted)">도구가 무엇이든 이 네 가지를 말해 주면 원하는 것에 가까워집니다.</p>

@@ -72,7 +72,7 @@
   <a href="index.html">🏠 홈</a>
   <a href="workbench.html">🛠️ 실습 워크벤치</a>
   <a href="playbook.html">📖 초보 가이드북</a>
-  <a href="handout.html">🖨️ 인쇄용 유인물</a>
+  <a href="handout.html">🖨️ 인쇄용 유인물</a><a href="submit.html">📤 제출함</a>
   <a href="script.html">📋 진행 대본</a>
   <a class="on" href="firebase_setup.html">🔧 강사 설정</a>
 </div></nav>
@@ -265,8 +265,28 @@ service cloud.firestore {
 </div>
 
 <div class="step">
-  <h3><span class="no">5</span> 학생 작품 올리기 — 세 번 있습니다</h3>
-  <p>학생 파일을 받아 저장소의 <code>works/</code> 폴더에 올립니다. 파일을 한꺼번에 끌어다 놓고 Commit 한 번이면 됩니다.</p>
+  <h3><span class="no">5</span> 제출함 연결하기 — 수업 전 한 번</h3>
+  <p>학생은 킷의 <b>📤 제출함</b>(<code>submit.html</code>)에서 파일을 냅니다.
+     그 버튼이 어디로 갈지는 선생님이 주소 한 줄로 정합니다.</p>
+  <p><b>구글 설문지로 받는 방법을 권합니다.</b> 학교 구글 계정으로 바로 되고,
+     낸 파일이 드라이브 한 폴더에 모여 통째로 내려받을 수 있습니다.</p>
+  <ol style="margin:8px 0 12px;padding-left:22px">
+    <li>구글 설문지를 새로 만들고 질문 유형을 <b>파일 업로드</b>로 바꿉니다.</li>
+    <li>'이름' 대신 <b>번호</b>나 <b>별명</b>을 적는 짧은 답변 문항을 하나 둡니다.</li>
+    <li>설정에서 <b>응답 횟수 제한 없음</b>으로 둡니다 — 4·5·6차시에 세 번 냅니다.</li>
+    <li>보내기 → 링크 복사.</li>
+    <li>깃허브에서 <code>submit.html</code>을 열고 연필(Edit)을 누릅니다.</li>
+    <li>파일 맨 아래 <code>▼ 여기 한 줄만 바꾸세요 ▼</code> 표시 바로 아래 줄의 따옴표 안에 링크를 붙여넣고 Commit합니다.</li>
+  </ol>
+  <div class="warn">
+    주소를 넣지 않으면 제출함에 <b>"아직 제출 주소가 연결되지 않았습니다"</b>라고만 뜹니다.
+    4차시 전까지는 꼭 연결해 두세요. 구글 클래스룸 과제나 공유 폴더 링크를 넣어도 똑같이 작동합니다.
+  </div>
+</div>
+
+<div class="step">
+  <h3><span class="no">6</span> 학생 작품 올리기 — 세 번 있습니다</h3>
+  <p>제출된 파일을 내려받아 저장소의 <code>works/</code> 폴더에 올립니다. 파일을 한꺼번에 끌어다 놓고 Commit 한 번이면 됩니다.</p>
   <table style="margin:10px 0">
     <thead><tr><th>시점</th><th>올릴 것</th><th>왜</th></tr></thead>
     <tbody>
