@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0d9488">
+<meta name="theme-color" content="#5B3DF5">
 <title>오늘 할 일 · 내 컴퓨터에만 저장</title>
 <style>
-  :root{--accent:#0d9488;--accent-dark:#0f766e;--ink:#14201f;--muted:#5c6b6a;
-        --line:#d7e2e0;--bg:#f6faf9;--done:#93a5a3}
+  :root{--accent:#5B3DF5;--accent-dark:#4A2FD6;--ink:#171A2E;--muted:#62648A;
+        --line:#DCDCE8;--bg:#F3F3F8;--done:#9A9CBC}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);
     font-family:-apple-system,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
@@ -16,11 +16,11 @@
   header{margin-bottom:18px}
   h1{font-size:27px;margin:0 0 2px}
   .date{color:var(--muted);font-size:15px;margin:0}
-  .progress{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px}
+  .progress{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:14px}
   .ptop{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
   .ptop b{font-size:25px}
   .ptop span{color:var(--muted);font-size:14px}
-  .bar{height:12px;border-radius:6px;background:#e3ecea;overflow:hidden}
+  .bar{height:12px;border-radius:6px;background:#E4E4EF;overflow:hidden}
   .bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .25s ease}
   form{display:flex;gap:8px;margin-bottom:14px}
   input[type=text]{flex:1;padding:13px 14px;font-size:16px;border:1px solid var(--line);
@@ -39,16 +39,19 @@
   li .txt{flex:1;font-size:16px;word-break:break-all;line-height:1.5}
   li.done .txt{color:var(--done);text-decoration:line-through}
   li .del{background:none;color:var(--muted);font-size:19px;padding:0 4px;line-height:1}
-  li .del:hover{background:none;color:#b23a48}
+  li .del:hover{background:none;color:#D9435A}
   .empty{background:#fff;border:1px dashed var(--line);border-radius:12px;padding:34px 18px;
     text-align:center;color:var(--muted);line-height:1.7}
   .tools{display:flex;justify-content:space-between;align-items:center;margin-top:16px;
     color:var(--muted);font-size:14px}
   .tools button{background:none;color:var(--muted);font-size:14px;padding:6px 10px;
     border:1px solid var(--line);border-radius:8px}
-  .tools button:hover{background:#eef4f3;color:var(--ink)}
+  .tools button:hover{background:#F0EFF9;color:var(--ink)}
   .note{background:#fff8e8;border:1px solid #f0dcb0;border-radius:11px;padding:13px 15px;
     margin-top:22px;font-size:14px;line-height:1.7;color:#6b4e12}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  nav :focus-visible{outline-color:#FFD400}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>

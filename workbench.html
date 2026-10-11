@@ -3,29 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0d9488">
+<meta name="theme-color" content="#171A2E">
 <title>실습 워크벤치 · 바이브코딩으로 만드는 나만의 게임과 학습 도구</title>
 <style>
-:root{--accent:#0d9488;--accent-dark:#0f766e;--accent-soft:#ccfbf1;--ink:#14201f;
-      --muted:#5c6b6a;--line:#d7e2e0;--bg:#f6faf9;--warn:#8a5a00;--warn-soft:#fff4e6}
+:root{--accent:#5B3DF5;--accent-dark:#4A2FD6;--accent-soft:#EDE9FE;--ink:#171A2E;
+      --muted:#62648A;--line:#DCDCE8;--bg:#F3F3F8;--warn:#8a5a00;--warn-soft:#fff4e6}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);
   font-family:-apple-system,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
   line-height:1.7;font-size:16px}
-nav{background:#fff;border-bottom:2px solid var(--accent);position:sticky;top:0;z-index:20}
+nav{background:var(--ink);position:sticky;top:0;z-index:20}
 nav .in{max-width:880px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:5px}
-nav a{color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px;font-size:15px}
-nav a:hover{background:var(--accent-soft);color:var(--accent-dark)}
+nav a{color:#A8ABD0;text-decoration:none;padding:6px 10px;border-radius:8px;font-size:15px}
+nav a:hover{background:#2B3053;color:#fff}
 nav a.on{background:var(--accent);color:#fff}
 main{max-width:880px;margin:0 auto;padding:26px 16px 90px}
 h1{font-size:31px;line-height:1.3;margin:10px 0 4px}
 .lead{color:var(--muted);margin:0 0 22px}
 .jump{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px}
-.jump a{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;
-  text-decoration:none;color:var(--ink);font-size:14.5px}
+.jump a{background:#fff;border:1px solid var(--line);border-radius:7px;padding:6px 11px;
+  text-decoration:none;color:var(--ink);font-size:14px}
 .jump a:hover{border-color:var(--accent);color:var(--accent-dark)}
-.canvasbox{background:#fff;border:1px solid var(--accent);border-radius:16px;
-  padding:22px;margin-bottom:28px}
+.canvasbox{background:#fff;border:1px solid var(--accent);border-radius:10px;
+  padding:22px;margin-bottom:34px;border-top:5px solid var(--accent)}
 .canvasbox h2{margin:0 0 4px;font-size:21px}
 .canvasbox p.sub{margin:0 0 16px;color:var(--muted);font-size:15px}
 .cvsteps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px}
@@ -33,27 +33,37 @@ h1{font-size:31px;line-height:1.3;margin:10px 0 4px}
 .cvstep b{display:block;font-size:16px;margin-bottom:3px}
 .cvstep .n{display:inline-block;background:var(--accent);color:#fff;font-weight:700;
   border-radius:6px;padding:1px 9px;font-size:13px;margin-bottom:7px}
-.cvstep span{color:#3c4d4b;font-size:14px;line-height:1.6;display:block}
-.shot{border:2px dashed #9fb8b4;border-radius:12px;background:#eef6f4;color:var(--muted);
+.cvstep span{color:#3A3C5C;font-size:14px;line-height:1.6;display:block}
+.shot{border:2px dashed #AAABC6;border-radius:12px;background:#F0EFF9;color:var(--muted);
   text-align:center;padding:36px 14px;margin:16px 0 0;font-size:14.5px}
 .shot img{max-width:100%;border-radius:8px;display:block}
-.lab{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:26px}
-.labhead{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px}
-.labhead .em{font-size:32px;line-height:1.2}
-.labhead h2{margin:0;font-size:21px}
-.labhead p{margin:3px 0 0;color:var(--muted);font-size:15px}
+.lab{background:#fff;border:1px solid var(--line);border-radius:10px;padding:0 22px 22px;
+  margin-bottom:30px;overflow:hidden}
+.labhead{display:flex;gap:14px;align-items:center;margin:0 -22px 18px;padding:16px 22px;
+  background:var(--ink);color:#fff}
+.labhead .em{font-size:30px;line-height:1.2}
+.labhead h2{margin:0;font-size:20.5px;letter-spacing:-.02em}
+.labhead p{margin:2px 0 0;color:#A8ABD0;font-size:14.5px}
 .prev{display:inline-block;background:var(--accent-soft);color:var(--accent-dark);
   text-decoration:none;border-radius:10px;padding:10px 16px;font-size:15px;margin-bottom:14px}
-.prev:hover{background:#b6f2e6}
-.codewrap{margin:12px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.prev:hover{background:#D5CCFB}
+.codewrap{margin:14px 0;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  background:#fff}
 .codewrap.accentbox{border-color:var(--accent)}
+.chrome{background:var(--ink);color:#A8ABD0;display:flex;align-items:center;gap:7px;
+  padding:8px 13px;font-family:ui-monospace,Consolas,"D2Coding",monospace;font-size:12.5px}
+.chrome i{width:8px;height:8px;border-radius:50%;background:#464C78;display:block;flex:0 0 auto}
+.chrome i:first-child{background:#FFD400}
+.chrome span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .codehead{display:flex;justify-content:space-between;align-items:center;gap:10px;
-  background:#eef4f3;padding:9px 12px;font-size:14px;color:var(--muted)}
-.codewrap.accentbox .codehead{background:var(--accent-soft);color:var(--accent-dark);font-weight:700}
-pre{margin:0;background:#11241f;color:#d8f3ec;padding:14px 16px;overflow:auto;
+  background:#F0EFF9;padding:9px 13px;font-size:14px;color:var(--muted);
+  border-bottom:1px solid var(--line)}
+.codewrap.accentbox .codehead{background:var(--accent-soft);color:var(--accent-dark);
+  font-weight:700;border-bottom-color:#CFC4FB}
+pre{margin:0;background:#11142B;color:#DCD9F6;padding:14px 16px;overflow:auto;
   font-size:13px;line-height:1.6;max-height:300px;
   font-family:ui-monospace,Consolas,"D2Coding",monospace;white-space:pre}
-.codewrap.accentbox pre{background:#0f2a26;font-size:14px;max-height:420px;
+.codewrap.accentbox pre{background:#1C2142;font-size:14px;max-height:420px;
   white-space:pre-wrap;word-break:break-word}
 .codewrap.dim pre{max-height:210px}
 pre code{background:none;color:inherit;padding:0}
@@ -75,9 +85,9 @@ h2.sec{font-size:23px;margin:44px 0 10px;padding-bottom:8px;border-bottom:2px so
 .fcard{background:#fff;border:1px solid var(--line);border-left:5px solid var(--accent);
   border-radius:12px;padding:15px 17px}
 .fcard b{display:block;font-size:16.5px;margin-bottom:3px}
-.fcard p{margin:0;font-size:14.5px;color:#3c4d4b;line-height:1.7}
+.fcard p{margin:0;font-size:14.5px;color:#3A3C5C;line-height:1.7}
 .fcard em{display:block;font-style:normal;color:var(--muted);font-size:13.5px;margin-top:7px}
-code{background:#eaf4f2;padding:1px 6px;border-radius:5px;font-size:14px;
+code{background:#EFEDFB;padding:1px 6px;border-radius:5px;font-size:14px;
   font-family:ui-monospace,Consolas,monospace}
 footer{max-width:880px;margin:0 auto;padding:22px 16px 70px;color:var(--muted);
   font-size:14px;border-top:1px solid var(--line)}
@@ -86,6 +96,9 @@ footer{max-width:880px;margin:0 auto;padding:22px 16px 70px;color:var(--muted);
   .lab{padding:17px} .labhead .em{font-size:26px} .labhead h2{font-size:19px}
   pre{font-size:12px}
 }
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+nav :focus-visible{outline-color:#FFD400}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
@@ -97,7 +110,7 @@ footer{max-width:880px;margin:0 auto;padding:22px 16px 70px;color:var(--muted);
 <div class="canvasbox"><h2>먼저 — 캔버스를 켜세요</h2><p class="sub">이 수업은 제미나이의 캔버스에서 진행합니다. 켜 두면 만든 화면이 오른쪽에 바로 뜹니다.</p><div class="cvsteps"><div class="cvstep"><span class="n">1</span><b>제미나이 열기</b><span>gemini.google.com · 학교 구글 계정으로 로그인</span></div><div class="cvstep"><span class="n">2</span><b>캔버스 켜기</b><span>입력창 아래의 캔버스 버튼을 누릅니다.</span></div><div class="cvstep"><span class="n">3</span><b>프롬프트 붙여넣기</b><span>아래에서 복사해 그대로 넣습니다.</span></div><div class="cvstep"><span class="n">4</span><b>고치기</b><span>고칠 부분만 말하면 그 자리에서 바뀝니다.</span></div></div><div class="shot"><img src="shots/canvas_button.png" alt="" onerror="this.style.display='none';this.parentNode.insertAdjacentText('beforeend','여기에 캔버스 버튼 위치 캡처 — shots/canvas_button.png')"></div></div>
 <section class="lab" id="l1">
 <div class="labhead"><span class="em">💬</span><div><h2>1차시 · AI와 대화하여 웹페이지 제작하기</h2><p>말로 설명했더니 화면이 생겼다</p></div></div>
-<div class="codewrap accentbox"><div class="codehead"><span>프롬프트 원문 — 캔버스를 켠 제미나이에 붙여넣기</span><button class="copy" data-t="l1-p">복사</button></div><pre id="l1-p"><code>웹페이지를 하나 만들어 줘. "나를 소개하는 페이지"야.
+<div class="codewrap accentbox"><div class="chrome"><i></i><i></i><i></i><span>gemini.google.com — 캔버스</span></div><div class="codehead"><span>프롬프트 원문 — 캔버스를 켠 제미나이에 붙여넣기</span><button class="copy" data-t="l1-p">복사</button></div><pre id="l1-p"><code>웹페이지를 하나 만들어 줘. "나를 소개하는 페이지"야.
 
 [목표와 환경]
 - HTML, CSS, 자바스크립트를 파일 하나에 모두 넣어 줘.
@@ -130,7 +143,7 @@ footer{max-width:880px;margin:0 auto;padding:22px 16px 70px;color:var(--muted);
 <section class="lab" id="l2">
 <div class="labhead"><span class="em">🎮</span><div><h2>2차시 · 게임 로직 설계하고 구현하기</h2><p>내가 정한 규칙으로 만드는 내 게임</p></div></div>
 <a class="prev" href="tool_game_mole.html" target="_blank" rel="noopener">▶ 시드 게임 먼저 보기</a>
-<div class="codewrap accentbox"><div class="codehead"><span>프롬프트 원문 — 캔버스를 켠 제미나이에 붙여넣기</span><button class="copy" data-t="l2-p">복사</button></div><pre id="l2-p"><code>웹게임을 하나 만들어 줘.
+<div class="codewrap accentbox"><div class="chrome"><i></i><i></i><i></i><span>gemini.google.com — 캔버스</span></div><div class="codehead"><span>프롬프트 원문 — 캔버스를 켠 제미나이에 붙여넣기</span><button class="copy" data-t="l2-p">복사</button></div><pre id="l2-p"><code>웹게임을 하나 만들어 줘.
 
 [만들 게임]
 여기에 내가 만들 게임을 3~4줄로 설명해.
@@ -164,7 +177,7 @@ footer{max-width:880px;margin:0 auto;padding:22px 16px 70px;color:var(--muted);
 <div class="idea"><span>➗</span><b>사칙연산 빨리 풀기</b><i>30초에 몇 문제나</i></div>
 <div class="idea"><span>🔍</span><b>다른 곳 찾기</b><i>두 화면의 차이 찾기</i></div>
 <div class="idea"><span>🧭</span><b>미로 탈출</b><i>방향키로 출구까지</i></div></div>
-<div class="codewrap dim"><div class="codehead"><span>완성 코드 — 반응속도</span><button class="copy" data-t="l2-d0">복사</button></div><pre id="l2-d0"><code>&lt;!DOCTYPE html&gt;
+<div class="codewrap dim"><div class="chrome"><i></i><i></i><i></i><span>tool_game_reaction.html</span></div><div class="codehead"><span>완성 코드 — 반응속도</span><button class="copy" data-t="l2-d0">복사</button></div><pre id="l2-d0"><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="ko"&gt;
 &lt;head&gt;
 &lt;meta charset="UTF-8"&gt;
@@ -334,7 +347,7 @@ bestEl.textContent = loadBest();
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre></div>
-<div class="codewrap dim"><div class="codehead"><span>완성 코드 — 숫자 맞히기</span><button class="copy" data-t="l2-d1">복사</button></div><pre id="l2-d1"><code>&lt;!DOCTYPE html&gt;
+<div class="codewrap dim"><div class="chrome"><i></i><i></i><i></i><span>tool_game_number.html</span></div><div class="codehead"><span>완성 코드 — 숫자 맞히기</span><button class="copy" data-t="l2-d1">복사</button></div><pre id="l2-d1"><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="ko"&gt;
 &lt;head&gt;
 &lt;meta charset="UTF-8"&gt;
@@ -505,7 +518,7 @@ start();
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre></div>
-<div class="codewrap dim"><div class="codehead"><span>완성 코드 — 두더지 잡기</span><button class="copy" data-t="l2-d2">복사</button></div><pre id="l2-d2"><code>&lt;!DOCTYPE html&gt;
+<div class="codewrap dim"><div class="chrome"><i></i><i></i><i></i><span>tool_game_mole.html</span></div><div class="codehead"><span>완성 코드 — 두더지 잡기</span><button class="copy" data-t="l2-d2">복사</button></div><pre id="l2-d2"><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="ko"&gt;
 &lt;head&gt;
 &lt;meta charset="UTF-8"&gt;
@@ -709,7 +722,7 @@ el('best').textContent = loadBest();
 </section>
 <section class="lab" id="l3">
 <div class="labhead"><span class="em">💾</span><div><h2>3차시 · 데이터 저장하여 기록 관리하기</h2><p>새로고침해도 최고 점수는 남는다</p></div></div>
-<div class="codewrap accentbox"><div class="codehead"><span>프롬프트 원문 — 캔버스를 켠 제미나이에 붙여넣기</span><button class="copy" data-t="l3-p">복사</button></div><pre id="l3-p"><code>지금 만든 게임에 최고 점수 저장 기능을 추가해 줘.
+<div class="codewrap accentbox"><div class="chrome"><i></i><i></i><i></i><span>gemini.google.com — 캔버스</span></div><div class="codehead"><span>프롬프트 원문 — 캔버스를 켠 제미나이에 붙여넣기</span><button class="copy" data-t="l3-p">복사</button></div><pre id="l3-p"><code>지금 만든 게임에 최고 점수 저장 기능을 추가해 줘.
 
 [추가할 것]
 - saveScore(점수) 함수를 만들어 줘. localStorage에 'best_' + GAME_ID 라는 이름으로 최고 점수만 저장해.
@@ -724,7 +737,7 @@ el('best').textContent = loadBest();
 
 [주의]
 - 저장 부분은 다른 코드와 섞지 말고 한 곳에 모아 줘. 주석으로 어디부터 어디까지인지 표시해 줘.</code></pre></div>
-<div class="codewrap "><div class="codehead"><span>저장 모듈 — 참고용</span><button class="copy" data-t="l3-mod">복사</button></div><pre id="l3-mod"><code>/* ===== 점수 저장 모듈 (3차시) =====
+<div class="codewrap "><div class="chrome"><i></i><i></i><i></i><span>내 게임 파일 안에 들어갈 부분</span></div><div class="codehead"><span>저장 모듈 — 참고용</span><button class="copy" data-t="l3-mod">복사</button></div><pre id="l3-mod"><code>/* ===== 점수 저장 모듈 (3차시) =====
    localStorage = 이 브라우저에만 남는 저장소 */
 
 const GAME_ID = 'my-game';   // 내 게임마다 다른 이름으로
@@ -756,7 +769,7 @@ function gameOver(score){
 <section class="lab" id="l4">
 <div class="labhead"><span class="em">📋</span><div><h2>4차시 · 사용자 중심 학습 도구 개발하기</h2><p>오늘부터 내가 진짜로 쓸 도구</p></div></div>
 <a class="prev" href="tool_todo_local.html" target="_blank" rel="noopener">▶ 완성된 도구 먼저 보기</a>
-<div class="codewrap accentbox"><div class="codehead"><span>프롬프트 원문 — 캔버스를 켠 제미나이에 붙여넣기</span><button class="copy" data-t="l4-p">복사</button></div><pre id="l4-p"><code>"오늘 할 일" 도구를 만들어 줘. 내가 매일 실제로 쓸 거야.
+<div class="codewrap accentbox"><div class="chrome"><i></i><i></i><i></i><span>gemini.google.com — 캔버스</span></div><div class="codehead"><span>프롬프트 원문 — 캔버스를 켠 제미나이에 붙여넣기</span><button class="copy" data-t="l4-p">복사</button></div><pre id="l4-p"><code>"오늘 할 일" 도구를 만들어 줘. 내가 매일 실제로 쓸 거야.
 
 [목표와 환경]
 - HTML, CSS, 자바스크립트를 파일 하나에. 외부 라이브러리는 쓰지 마.
@@ -779,7 +792,7 @@ function gameOver(score){
 - localStorage에 저장해서 새로고침해도 남아 있게 해 줘.
 - 화면 아래에 "이 목록은 지금 쓰는 브라우저에만 저장됩니다"라고 안내해 줘.</code></pre></div>
 
-<div class="codewrap dim"><div class="codehead"><span>완성 코드 — 오늘 할 일</span><button class="copy" data-t="l4-d0">복사</button></div><pre id="l4-d0"><code>&lt;!DOCTYPE html&gt;
+<div class="codewrap dim"><div class="chrome"><i></i><i></i><i></i><span>tool_todo_local.html</span></div><div class="codehead"><span>완성 코드 — 오늘 할 일</span><button class="copy" data-t="l4-d0">복사</button></div><pre id="l4-d0"><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="ko"&gt;
 &lt;head&gt;
 &lt;meta charset="UTF-8"&gt;
@@ -964,7 +977,7 @@ render();
 <section class="lab" id="l5">
 <div class="labhead"><span class="em">🔐</span><div><h2>5차시 · 계정 인증과 클라우드 데이터베이스 연동하기</h2><p>로그인하면 집에서도 내 것이 그대로</p></div></div>
 <a class="prev" href="tool_todo.html" target="_blank" rel="noopener">▶ 로그인 도구 먼저 보기</a>
-<div class="codewrap accentbox"><div class="codehead"><span>프롬프트 원문 — 캔버스를 켠 제미나이에 붙여넣기</span><button class="copy" data-t="l5-p">복사</button></div><pre id="l5-p"><code>지금 만든 할 일 도구에 구글 로그인과 클라우드 저장을 붙여 줘.
+<div class="codewrap accentbox"><div class="chrome"><i></i><i></i><i></i><span>gemini.google.com — 캔버스</span></div><div class="codehead"><span>프롬프트 원문 — 캔버스를 켠 제미나이에 붙여넣기</span><button class="copy" data-t="l5-p">복사</button></div><pre id="l5-p"><code>지금 만든 할 일 도구에 구글 로그인과 클라우드 저장을 붙여 줘.
 
 [설정값]
 아래 firebaseConfig를 코드 맨 위에 넣고 써 줘.
@@ -991,16 +1004,14 @@ render();
 [안내 문구]
 - 화면 아래에 "내 할 일은 내 계정에만 저장되고 다른 사람은 볼 수 없습니다"라고 넣어 줘.</code></pre></div>
 <div class="codewrap"><div class="codehead"><span>우리 반 파이어베이스 설정값</span><button class="copy" data-t="cfgbox">복사</button></div><pre id="cfgbox"><code>// ===== 우리 반 파이어베이스 설정값 =====
-// 이 블록을 프롬프트에 그대로 붙여넣으세요.
+// 강사용 설정 페이지 7단계에서 만든 블록으로 이 자리를 바꿔 주세요.
 const firebaseConfig = {
-  apiKey: "AIzaSyCxGZMzPDYXnkSdlqMXNanMGKO24RbdiI8",
-  authDomain: "student-vibe-coding.firebaseapp.com",
-  projectId: "student-vibe-coding",
-  storageBucket: "student-vibe-coding.firebasestorage.app",
-  messagingSenderId: "358029692461",
-  appId: "1:358029692461:web:5c0972625348118ed6b2a4"
+  apiKey: "여기에-우리반-설정값을-붙여넣으세요",
+  authDomain: "프로젝트이름.firebaseapp.com",
+  projectId: "프로젝트이름",
+  appId: "앱아이디"
 };</code></pre></div>
-<div class="codewrap dim"><div class="codehead"><span>완성 코드 — 로그인되는 할 일 도구</span><button class="copy" data-t="l5-d0">복사</button></div><pre id="l5-d0"><code>&lt;!DOCTYPE html&gt;
+<div class="codewrap dim"><div class="chrome"><i></i><i></i><i></i><span>tool_todo.html</span></div><div class="codehead"><span>완성 코드 — 로그인되는 할 일 도구</span><button class="copy" data-t="l5-d0">복사</button></div><pre id="l5-d0"><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="ko"&gt;
 &lt;head&gt;
 &lt;meta charset="UTF-8"&gt;
@@ -1127,12 +1138,10 @@ const firebaseConfig = {
    강사가 준 블록으로 아래를 통째로 바꾸세요.
    ========================================================= */
 const firebaseConfig = {
-  apiKey: "AIzaSyCxGZMzPDYXnkSdlqMXNanMGKO24RbdiI8",
-  authDomain: "student-vibe-coding.firebaseapp.com",
-  projectId: "student-vibe-coding",
-  storageBucket: "student-vibe-coding.firebasestorage.app",
-  messagingSenderId: "358029692461",
-  appId: "1:358029692461:web:5c0972625348118ed6b2a4"
+  apiKey: "여기에-우리반-설정값을-붙여넣으세요",
+  authDomain: "프로젝트이름.firebaseapp.com",
+  projectId: "프로젝트이름",
+  appId: "앱아이디"
 };
 /* ========================================================= */
 
@@ -1319,7 +1328,7 @@ if (!READY){
 <section class="lab" id="l6">
 <div class="labhead"><span class="em">🌍</span><div><h2>6차시 · 웹 서비스 배포하고 공유하기</h2><p>주소가 생기면 친구가 내 게임을 한다</p></div></div>
 <a class="prev" href="tool_gallery.html" target="_blank" rel="noopener">▶ 전시관 먼저 보기</a>
-<div class="codewrap accentbox"><div class="codehead"><span>프롬프트 원문 — 캔버스를 켠 제미나이에 붙여넣기</span><button class="copy" data-t="l6-p">복사</button></div><pre id="l6-p"><code>지금 만든 게임에 "랭킹에 점수 올리기" 기능을 붙여 줘.
+<div class="codewrap accentbox"><div class="chrome"><i></i><i></i><i></i><span>gemini.google.com — 캔버스</span></div><div class="codehead"><span>프롬프트 원문 — 캔버스를 켠 제미나이에 붙여넣기</span><button class="copy" data-t="l6-p">복사</button></div><pre id="l6-p"><code>지금 만든 게임에 "랭킹에 점수 올리기" 기능을 붙여 줘.
 
 [설정값]
 아래 firebaseConfig를 코드 맨 위에 넣어 줘.
@@ -1335,7 +1344,7 @@ if (!READY){
 - nickname은 localStorage의 'nickname' 값을 써. 없으면 "전시관에서 별명을 먼저 저장하세요"라고 알려 줘.
 - 지금 점수가 내 최고 기록보다 낮으면 올리지 말고 "최고 기록일 때만 올라갑니다"라고 알려 줘.
 - 올리기에 실패하면 무슨 오류인지 화면에 보여 줘.</code></pre></div>
-<div class="codewrap "><div class="codehead"><span>점수 올리기 모듈 — 참고용</span><button class="copy" data-t="l6-mod">복사</button></div><pre id="l6-mod"><code>/* ===== 점수 올리기 모듈 (6차시) =====
+<div class="codewrap "><div class="chrome"><i></i><i></i><i></i><span>내 게임 파일 안에 들어갈 부분</span></div><div class="codehead"><span>점수 올리기 모듈 — 참고용</span><button class="copy" data-t="l6-mod">복사</button></div><pre id="l6-mod"><code>/* ===== 점수 올리기 모듈 (6차시) =====
    우리 반 전시관 랭킹에 내 점수를 올립니다.
    이 블록을 내 게임 파일의 &lt;script type="module"&gt; 안에 붙여넣으세요. */
 
@@ -1375,7 +1384,7 @@ async function uploadScore(score){
     console.error(e);
   }
 }</code></pre></div>
-<div class="codewrap dim"><div class="codehead"><span>완성 코드 — 우리 반 전시관</span><button class="copy" data-t="l6-d0">복사</button></div><pre id="l6-d0"><code>&lt;!DOCTYPE html&gt;
+<div class="codewrap dim"><div class="chrome"><i></i><i></i><i></i><span>tool_gallery.html</span></div><div class="codehead"><span>완성 코드 — 우리 반 전시관</span><button class="copy" data-t="l6-d0">복사</button></div><pre id="l6-d0"><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="ko"&gt;
 &lt;head&gt;
 &lt;meta charset="UTF-8"&gt;
@@ -1524,12 +1533,10 @@ async function uploadScore(score){
    우리 반 파이어베이스 설정값 — 강사가 준 블록으로 바꾸세요
    ========================================================= */
 const firebaseConfig = {
-  apiKey: "AIzaSyCxGZMzPDYXnkSdlqMXNanMGKO24RbdiI8",
-  authDomain: "student-vibe-coding.firebaseapp.com",
-  projectId: "student-vibe-coding",
-  storageBucket: "student-vibe-coding.firebasestorage.app",
-  messagingSenderId: "358029692461",
-  appId: "1:358029692461:web:5c0972625348118ed6b2a4"
+  apiKey: "여기에-우리반-설정값을-붙여넣으세요",
+  authDomain: "프로젝트이름.firebaseapp.com",
+  projectId: "프로젝트이름",
+  appId: "앱아이디"
 };
 /* ========================================================= */
 
@@ -1725,7 +1732,7 @@ async function loadRanking(){
 <h2 class="sec" id="formula">프롬프트 작성 공식</h2>
 <p style="margin:0;color:var(--muted)">도구가 무엇이든 이 네 가지를 말해 주면 원하는 것에 가까워집니다.</p>
 <div class="formula"><div class="fcard"><b>🎯 목표와 환경</b><p>무엇을 만들지, 어디서 돌아가야 하는지.</p><em>"파일 하나로 완결되게, 외부 라이브러리 없이"</em></div><div class="fcard"><b>🎨 디자인과 배치</b><p>화면 구성, 색, 글자 크기, 휴대폰 대응.</p><em>"맨 위에 점수를 크게, 휴대폰에서도 가로 스크롤 없이"</em></div><div class="fcard"><b>⚙️ 동작 규칙</b><p>무엇을 누르면 무엇이 일어나는지, 예외는 어떻게.</p><em>"폭탄을 누르면 15점이 깎이되 0점 밑으로는 안 내려가게"</em></div><div class="fcard"><b>🗄️ 데이터 보관</b><p>저장할지, 새로고침해도 남아야 하는지.</p><em>"최고 점수만 localStorage에 저장해 줘"</em></div></div>
-<h2 class="sec">고칠 때는 짧게</h2><p>캔버스에서는 전체 코드를 다시 달라고 할 필요가 없습니다. <b>고칠 부분만</b> 말하면 그 자리에서 바뀝니다. 이 수업에서 가장 많이 하게 될 일입니다.</p><div class="codewrap "><div class="codehead"><span>이런 식으로 한 줄씩</span><button class="copy" data-t="fixline">복사</button></div><pre id="fixline"><code>제목을 더 크게 해 줘.
+<h2 class="sec">고칠 때는 짧게</h2><p>캔버스에서는 전체 코드를 다시 달라고 할 필요가 없습니다. <b>고칠 부분만</b> 말하면 그 자리에서 바뀝니다. 이 수업에서 가장 많이 하게 될 일입니다.</p><div class="codewrap "><div class="chrome"><i></i><i></i><i></i><span>gemini.google.com — 캔버스</span></div><div class="codehead"><span>이런 식으로 한 줄씩</span><button class="copy" data-t="fixline">복사</button></div><pre id="fixline"><code>제목을 더 크게 해 줘.
 버튼을 눌러도 아무 일도 안 일어나. 왜 그런지 찾아서 고쳐 줘.
 폭탄이 너무 자주 나와. 조금 줄여 줘.
 휴대폰에서 가로로 밀려. 세로로 접히게 고쳐 줘.</code></pre></div>

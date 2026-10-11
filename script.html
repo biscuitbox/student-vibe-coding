@@ -3,26 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0d9488">
+<meta name="theme-color" content="#5B3DF5">
 <title>진행 대본 · 강사용</title>
 <style>
-  :root{--accent:#0d9488;--accent-dark:#0f766e;--accent-soft:#ccfbf1;
-    --ink:#14201f;--muted:#5c6b6a;--line:#d7e2e0;--bg:#f6faf9;
-    --warn:#b4530a;--warn-soft:#fff4e6;--say:#f0f8f7}
+  :root{--accent:#5B3DF5;--accent-dark:#4A2FD6;--accent-soft:#EDE9FE;
+    --ink:#171A2E;--muted:#62648A;--line:#DCDCE8;--bg:#F3F3F8;
+    --warn:#b4530a;--warn-soft:#fff4e6;--say:#F0EFF9}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px;
     font-family:-apple-system,"Malgun Gothic","Apple SD Gothic Neo",sans-serif}
-  nav{background:#fff;border-bottom:2px solid var(--accent);position:sticky;top:0;z-index:30}
+  nav{background:var(--ink);position:sticky;top:0;z-index:30}
   nav .in{max-width:980px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px}
-  nav a{color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px;font-size:15px}
-  nav a:hover{background:var(--accent-soft);color:var(--accent-dark)}
+  nav a{color:#A8ABD0;text-decoration:none;padding:6px 10px;border-radius:8px;font-size:15px}
+  nav a:hover{background:#2B3053;color:#fff}
   nav a.on{background:var(--accent);color:#fff}
   main{max-width:980px;margin:0 auto;padding:24px 16px 90px}
   h1{font-size:30px;line-height:1.3;margin:10px 0 6px}
   .sub{color:var(--muted);margin:0 0 24px}
   h2{font-size:22px;margin:40px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--line)}
   h3{font-size:17.5px;margin:26px 0 8px}
-  code{background:#eaf4f2;padding:1px 6px;border-radius:5px;font-size:14px;
+  code{background:#EFEDFB;padding:1px 6px;border-radius:5px;font-size:14px;
     font-family:ui-monospace,Consolas,monospace;word-break:break-all}
   .warn{background:var(--warn-soft);border:1px solid #f0c391;border-left:5px solid var(--warn);
     border-radius:10px;padding:14px 17px;margin:16px 0}
@@ -46,7 +46,7 @@
 
   /* 차시 머리 */
   .shead{background:linear-gradient(135deg,var(--accent-dark),var(--accent));color:#fff;
-    border-radius:16px;padding:22px 24px;margin:18px 0 6px}
+    border-radius:10px;padding:22px 24px;margin:18px 0 6px}
   .shead .n{font-size:13.5px;opacity:.85;letter-spacing:.04em}
   .shead h3{font-size:25px;margin:3px 0 6px;color:#fff}
   .shead p{margin:0;font-size:15.5px;opacity:.93;line-height:1.6}
@@ -59,22 +59,22 @@
   .timer button{font-family:inherit;font-size:14.5px;padding:7px 15px;border-radius:9px;
     border:0;background:var(--accent);color:#fff;cursor:pointer}
   .timer button:hover{background:var(--accent-dark)}
-  .timer button.gray{background:#8aa4a1}
+  .timer button.gray{background:#9496BC}
   .timer .now{color:var(--muted);font-size:14.5px}
 
   /* 블록 */
-  .blk{background:#fff;border:1px solid var(--line);border-radius:14px;padding:0;
+  .blk{background:#fff;border:1px solid var(--line);border-radius:10px;padding:0;
     margin:14px 0;overflow:hidden}
-  .blk.live{border-color:var(--accent);box-shadow:0 0 0 3px rgba(13,148,136,.16)}
+  .blk.live{border-color:#E6BF00;box-shadow:0 0 0 3px rgba(255,212,0,.32)}
   .blk > .bh{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;
-    background:#f1f8f7;border-bottom:1px solid var(--line);padding:12px 18px}
-  .blk.live > .bh{background:var(--accent);color:#fff}
+    background:#F0EFF9;border-bottom:1px solid var(--line);padding:12px 18px}
+  .blk.live > .bh{background:#FFD400;color:var(--ink)}
   .blk .min{font-weight:700;font-size:16.5px;font-variant-numeric:tabular-nums;
     color:var(--accent-dark)}
-  .blk.live .min{color:#fff}
+  .blk.live .min{color:var(--ink)}
   .blk .bn{font-size:17px;font-weight:700}
   .blk .sl{margin-left:auto;font-size:13.5px;color:var(--muted)}
-  .blk.live .sl{color:#d6f2ee}
+  .blk.live .sl{color:#7A6400}
   .bb{padding:15px 18px}
   .lab{font-size:13px;font-weight:700;color:var(--accent-dark);letter-spacing:.03em;
     margin:0 0 5px}
@@ -90,7 +90,7 @@
   .box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px 18px}
   .box h4{margin:0 0 7px;font-size:16px}
   dl{margin:0} dt{font-weight:700;margin-top:12px} dt:first-child{margin-top:0}
-  dd{margin:3px 0 0;color:#3d4e4c}
+  dd{margin:3px 0 0;color:#3A3C5C}
   footer{max-width:980px;margin:0 auto;padding:24px 16px 60px;color:var(--muted);
     font-size:14px;border-top:1px solid var(--line)}
   .pbtn{float:right;font-family:inherit;font-size:14px;padding:7px 14px;border-radius:9px;
@@ -110,9 +110,11 @@
     .ses{display:block!important;page-break-before:always}
     .ses:first-of-type{page-break-before:avoid}
     .blk,.box,.warn,.note{break-inside:avoid;box-shadow:none}
-    .shead{background:#0f766e!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .shead{background:#4A2FD6!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .blk > .bh{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   }
+  :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  nav :focus-visible{outline-color:#FFD400}
 </style>
 </head>
 <body>

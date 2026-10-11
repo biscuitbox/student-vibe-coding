@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0d9488">
+<meta name="theme-color" content="#5B3DF5">
 <title>인쇄용 유인물 · 바이브코딩으로 만드는 나만의 게임과 학습 도구</title>
 <style>
-  :root{--accent:#0d9488;--accent-dark:#0f766e;--accent-soft:#ccfbf1;--ink:#14201f;
-        --muted:#5c6b6a;--line:#c9d6d4;--bg:#f6faf9}
+  :root{--accent:#5B3DF5;--accent-dark:#4A2FD6;--accent-soft:#EDE9FE;--ink:#171A2E;
+        --muted:#62648A;--line:#CFCFE0;--bg:#F3F3F8}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);line-height:1.6;font-size:15px;
     font-family:-apple-system,"Malgun Gothic","Apple SD Gothic Neo",sans-serif}
-  nav{background:#fff;border-bottom:2px solid var(--accent);position:sticky;top:0;z-index:20}
+  nav{background:var(--ink);position:sticky;top:0;z-index:20}
   nav .in{max-width:860px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:5px}
-  nav a{color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px;font-size:15px}
-  nav a:hover{background:var(--accent-soft);color:var(--accent-dark)}
+  nav a{color:#A8ABD0;text-decoration:none;padding:6px 10px;border-radius:8px;font-size:15px}
+  nav a:hover{background:#2B3053;color:#fff}
   nav a.on{background:var(--accent);color:#fff}
   .tools{max-width:860px;margin:18px auto 0;padding:0 16px;display:flex;gap:10px;align-items:center}
   .tools button{background:var(--accent);color:#fff;border:0;border-radius:9px;padding:10px 18px;
@@ -42,7 +42,7 @@
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .box{border:1px solid var(--line);border-radius:9px;padding:11px 13px}
   .box b{display:block;font-size:14.5px;margin-bottom:3px;color:var(--accent-dark)}
-  .box p{margin:0;font-size:13.5px;color:#3c4d4b;line-height:1.6}
+  .box p{margin:0;font-size:13.5px;color:#3A3C5C;line-height:1.6}
   .blank{display:inline-block;min-width:92px;border-bottom:1.5px solid var(--accent);
     height:1.25em;vertical-align:baseline}
   .blank.w{min-width:170px}
@@ -57,7 +57,7 @@
   .mini{font-size:13px;color:var(--muted);margin-top:5px}
   .foot{margin-top:18px;padding-top:9px;border-top:1px solid var(--line);
     font-size:12px;color:var(--muted);display:flex;justify-content:space-between}
-  code{background:#eef4f3;padding:0 4px;border-radius:4px;font-size:13.5px;
+  code{background:#F0EFF9;padding:0 4px;border-radius:4px;font-size:13.5px;
     font-family:ui-monospace,Consolas,monospace}
 
   @media (max-width:620px){
@@ -66,16 +66,24 @@
   }
   @media print{
     @page{size:A4 portrait;margin:13mm}
-    body{background:#fff;font-size:10.5pt;line-height:1.5}
+    body{background:#fff;font-size:10pt;line-height:1.45}
     nav,.tools{display:none}
     .sheet{max-width:none;margin:0;border:0;border-radius:0;padding:0;page-break-after:always}
     .sheet:last-child{page-break-after:auto}
     .ttl h1{font-size:15pt}
-    h2{font-size:11.5pt;margin:13px 0 5px}
-    .lines{min-height:88px} .lines.tall{min-height:130px}
-    .chk{font-size:10pt} table{font-size:9.5pt}
+    h2{font-size:11pt;margin:9px 0 4px}
+    .lines{min-height:40px} .lines.tall{min-height:62px}
+    .chk{font-size:9.5pt;line-height:1.65} table{font-size:9pt}
+    ul,p{margin-top:5px;margin-bottom:5px}
     .box p{font-size:9.5pt}
+    /* 뒷면이 셋째 쪽으로 넘치지 않게 */
+    .sheet{overflow:hidden}
+    .sheet > *{break-inside:avoid}
+    .foot{margin-top:10px}
   }
+  :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  nav :focus-visible{outline-color:#FFD400}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
