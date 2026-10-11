@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d9488">
+<title>오늘 할 일 — 업로드 확인용 예시</title>
+<style>
+  :root{--accent:#0d9488;--accent-dark:#0f766e;--accent-soft:#ccfbf1;
+        --ink:#14201f;--muted:#5c6b6a;--line:#d7e2e0;--bg:#f6faf9}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px;
+    font-family:-apple-system,"Malgun Gothic","Apple SD Gothic Neo",sans-serif}
+  .wrap{max-width:560px;margin:0 auto;padding:28px 16px 70px}
+  .ok{background:var(--accent-soft);border:1px solid var(--accent);border-radius:14px;
+    padding:16px 19px;margin-bottom:22px}
+  .ok b{color:var(--accent-dark)}
+  .ok p{margin:6px 0 0;font-size:14.5px;color:#2b4341}
+  h1{font-size:25px;margin:0 0 4px}
+  .lead{color:var(--muted);font-size:14.5px;margin:0 0 20px}
+  .row{display:flex;gap:8px;margin-bottom:16px}
+  input{flex:1;min-width:0;padding:12px 14px;font-size:16px;border:1px solid var(--line);
+    border-radius:11px;font-family:inherit;background:#fff}
+  input:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+  button{padding:12px 18px;font-size:16px;border:0;border-radius:11px;background:var(--accent);
+    color:#fff;font-family:inherit;cursor:pointer;white-space:nowrap}
+  button:hover{background:var(--accent-dark)}
+  ul{list-style:none;margin:0;padding:0}
+  li{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 15px;
+    margin-bottom:9px;display:flex;align-items:center;gap:11px}
+  li.done span{text-decoration:line-through;color:var(--muted)}
+  li span{flex:1;min-width:0;overflow-wrap:break-word}
+  li input[type=checkbox]{width:19px;height:19px;flex:0 0 auto;accent-color:var(--accent)}
+  .del{background:none;color:#b24a3c;padding:4px 7px;font-size:19px;line-height:1}
+  .del:hover{background:#fdecea}
+  .empty{color:var(--muted);text-align:center;padding:26px 10px;font-size:14.5px}
+  .foot{margin-top:24px;padding-top:16px;border-top:1px solid var(--line);
+    color:var(--muted);font-size:13.5px}
+  .foot code{background:#fff;border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="ok">
+    <b>✅ 이 페이지가 보이면 works 폴더는 정상입니다.</b>
+    <p>깃허브 페이지 배포와 works 폴더 주소가 모두 작동하고 있습니다.
+       학생 파일도 같은 방식으로 올리면 열립니다.</p>
+  </div>
+
+  <h1>오늘 할 일</h1>
+  <p class="lead">업로드 확인용 예시 파일입니다. 4차시에 학생들이 만들 도구의 모양입니다.</p>
+
+  <div class="row">
+    <input id="txt" type="text" placeholder="할 일을 적어 보세요" maxlength="60">
+    <button id="add">추가</button>
+  </div>
+
+  <ul id="list"></ul>
+  <div class="empty" id="empty">아직 없습니다. 위에 적고 추가를 눌러 보세요.</div>
+
+  <div class="foot">
+    이 목록은 지금 쓰는 브라우저에만 저장됩니다. 다른 기기에서는 보이지 않습니다.<br>
+    로그인을 붙여 어디서나 보이게 하는 것이 <b>5차시</b>에 하는 일입니다.<br><br>
+    주소 모양 — <code>.../works/todo_이름.html</code>
+  </div>
+
+</div>
+<script>
+  var KEY='todo_sample_v1', items=[];
+  try{ items = JSON.parse(localStorage.getItem(KEY)) || []; }catch(e){ items = []; }
+  if(!Array.isArray(items)) items=[];
+
+  var list=document.getElementById('list'), empty=document.getElementById('empty'),
+      txt=document.getElementById('txt');
+
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(items)); }catch(e){} }
+
+  function draw(){
+    list.innerHTML='';
+    empty.style.display = items.length ? 'none' : 'block';
+    items.forEach(function(it, i){
+      var li=document.createElement('li');
+      if(it.done) li.className='done';
+
+      var cb=document.createElement('input');
+      cb.type='checkbox'; cb.checked=!!it.done;
+      cb.addEventListener('change', function(){ items[i].done=cb.checked; save(); draw(); });
+
+      var sp=document.createElement('span');
+      sp.textContent=it.text;
+
+      var del=document.createElement('button');
+      del.className='del'; del.textContent='×'; del.title='지우기';
+      del.addEventListener('click', function(){ items.splice(i,1); save(); draw(); });
+
+      li.appendChild(cb); li.appendChild(sp); li.appendChild(del);
+      list.appendChild(li);
+    });
+  }
+
+  function add(){
+    var v=txt.value.trim();
+    if(!v) return;
+    items.push({text:v, done:false});
+    txt.value=''; save(); draw(); txt.focus();
+  }
+
+  document.getElementById('add').addEventListener('click', add);
+  txt.addEventListener('keydown', function(e){ if(e.key==='Enter') add(); });
+  draw();
+</script>
+</body>
+</html>
